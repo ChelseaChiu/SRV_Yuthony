@@ -26,5 +26,11 @@ namespace SRV_UWP.views
         {
             this.InitializeComponent();
         }
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            //Need login check before page navigation
+            //Frame.Navigate(typeof(Result_Student_View));     //If user is student          
+            Frame.Navigate(typeof(Result_Lecturer_View));      //If user is lecturer
+        }
     }
 }

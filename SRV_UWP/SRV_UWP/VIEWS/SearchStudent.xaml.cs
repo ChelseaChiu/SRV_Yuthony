@@ -26,5 +26,19 @@ namespace SRV_UWP.views
         {
             this.InitializeComponent();
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Result_Lecturer_View));  //need to pass parameter to the next page for the future development
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+
+            //need log out functionality here
+
+            Frame.Navigate(typeof(LoginPage)); //Log out and navigate to log in page
+
+        }
     }
 }

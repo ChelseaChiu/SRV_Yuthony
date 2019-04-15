@@ -18,6 +18,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Button Margin="200,0,0,5" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click" VerticalAlignment="Bottom" Height="32"/>
+            <Button Margin="300,0,0,5" Grid.Row="1" x:Name="btnSearch" Content="Search" Background="Gray" Foreground="White" Click="btnSearch_Click" VerticalAlignment="Bottom"/>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
                 <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
             </StackPanel>
@@ -52,8 +54,9 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button x:Name="btnApprove" Content="Approve Generating Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center"/>
-                <Button x:Name="btnFurtherAction" Content="Further Action" VerticalAlignment="Center"  Background="#be1428" Margin="25" Foreground="white" HorizontalAlignment="Center"/>
+                <Button x:Name="btnApprove" Content="Approve Generating Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="10" Foreground="white" HorizontalAlignment="Center"/>
+                <Button x:Name="btnDisApprove" Content="Disaprrove Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="10" Foreground="white" HorizontalAlignment="Center"/>
+                <Button x:Name="btnFurtherAction" Content="Further Action" VerticalAlignment="Center"  Background="#be1428" Margin="10" Foreground="white" HorizontalAlignment="Center" Click="btnFurtherAction_Click"/>
             </StackPanel>
         </Grid>
         <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>
