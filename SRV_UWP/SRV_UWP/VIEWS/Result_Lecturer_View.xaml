@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="SRV_UWP.MainPage"
+    x:Class="SRV_UWP.views.Result_Lecturer_View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SRV_UWP"
+    xmlns:local="using:SRV_UWP.views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -51,9 +51,12 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Button Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" x:Name="btnReqParche4" Content="Request Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white"/>
-
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="btnApprove" Content="Approve Generating Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center"/>
+                <Button x:Name="btnFurtherAction" Content="Further Action" VerticalAlignment="Center"  Background="#be1428" Margin="25" Foreground="white" HorizontalAlignment="Center"/>
+            </StackPanel>
         </Grid>
         <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>
     </Grid>
 </Page>
+

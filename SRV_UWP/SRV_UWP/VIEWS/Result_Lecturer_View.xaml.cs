@@ -15,14 +15,14 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SRV_UWP.View
+namespace SRV_UWP.views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class StuPieChart : Page
+    public sealed partial class Result_Lecturer_View : Page
     {
-        public StuPieChart()
+        public Result_Lecturer_View()
         {
             this.InitializeComponent();
         }
