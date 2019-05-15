@@ -92,6 +92,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="models\Competency.cs" />
+    <Compile Include="models\Lecturer.cs" />
+    <Compile Include="models\Parchment.cs" />
+    <Compile Include="models\ParchmentRequest.cs" />
+    <Compile Include="models\Qualification.cs" />
+    <Compile Include="models\Student.cs" />
+    <Compile Include="models\User.cs" />
     <Compile Include="viewmodels\DetailsViewModel.cs" />
     <Compile Include="viewmodels\MainViewModel.cs" />
     <Compile Include="views\FurtherAction_Lecturer.xaml.cs">
@@ -156,9 +163,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.1.0</Version>

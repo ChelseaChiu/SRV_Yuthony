@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SRV_UWP.models
 {
-    public class Parchment
+    public class ParchmentRequest
     {
-        public static string ApprovalDate { get; set; }
-        public static string ApproveBy { get; set; }
+        public static string RequestDate { get; set; }
+        public static bool RequestedStatus { get; set; }
     }
 }
