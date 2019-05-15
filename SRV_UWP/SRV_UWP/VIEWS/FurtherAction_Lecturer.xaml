@@ -35,6 +35,7 @@
                     </ComboBox>
                 </StackPanel>
             </StackPanel>
+            <Button Margin="100,0,0,0" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click"/>
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="vertical" HorizontalAlignment="Center">
                 <StackPanel Orientation="horizontal">
                     <StackPanel Orientation="vertical">
@@ -53,7 +54,7 @@
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="btnUpdateData" Content="Update To Database" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center"/>
-                <Button x:Name="btnBack" Content="Back To Previous Page" VerticalAlignment="Center"  Background="#be1428" Margin="25" Foreground="white" HorizontalAlignment="Center"/>
+                <Button x:Name="btnBack" Content="Back To Previous Page" VerticalAlignment="Center"  Background="#be1428" Margin="25" Foreground="white" HorizontalAlignment="Center" Click="BtnBack_Click"/>
             </StackPanel>
         </Grid>
         <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>

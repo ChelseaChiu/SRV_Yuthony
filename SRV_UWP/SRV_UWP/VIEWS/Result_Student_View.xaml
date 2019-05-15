@@ -18,6 +18,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Button Margin="100,0,0,0" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click"/>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
                 <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
             </StackPanel>

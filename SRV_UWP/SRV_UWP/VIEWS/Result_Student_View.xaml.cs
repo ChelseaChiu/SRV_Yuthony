@@ -26,5 +26,13 @@ namespace SRV_UWP.views
         {
             this.InitializeComponent();
         }
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+
+            //need log out functionality here
+
+            Frame.Navigate(typeof(LoginPage)); //Log out and navigate to log in page
+
+        }
     }
 }

@@ -13,7 +13,7 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="12*" />
             </Grid.RowDefinitions>
-            <Button Margin="200,0,0,0" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click"/>
+            <Button Margin="100,0,0,0" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click"/>
 
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center">
                 <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
