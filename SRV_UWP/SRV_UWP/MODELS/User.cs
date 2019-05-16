@@ -8,14 +8,14 @@ namespace SRV_UWP.models
 {
     public class User
     {
-        public string FirstName { get; }
-        public string LastName { get; }
+        public string FirstName { get;set; }
+        public string LastName { get; set; }
         public string Email { get; }
         public string Phone { get; }
         public string Address { get; }
         public string DOB { get; }
         public string UserID { get; set; }
-        public string Password { get; }
+        public string Password { get; set; }
 
         public bool Login(string id, string password)
         {

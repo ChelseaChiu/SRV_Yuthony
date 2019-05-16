@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using SRV_UWP.models;
+using SRV_UWP.viewmodels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,11 +25,27 @@ namespace SRV_UWP.views
     /// </summary>
     public sealed partial class Result_Lecturer_View : Page
     {
+        DetailsViewModel viewModel;
         public Result_Lecturer_View()
         {
             this.InitializeComponent();
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
 
+            string id = (string)e.Parameter;
+
+            if (viewModel == null)
+            {
+                viewModel = new DetailsViewModel(id);
+                DataContext = viewModel.Student;
+            }
+            //else
+            //{
+            //    Frame.Navigate(typeof(views.MainPage));
+
+            //}
+        }
         private void btnFurtherAction_Click(object sender, RoutedEventArgs e)
         {
             //Navigate to FurtherAction page

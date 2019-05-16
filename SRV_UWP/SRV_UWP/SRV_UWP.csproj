@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="models\Competency.cs" />
     <Compile Include="models\Lecturer.cs" />
+    <Compile Include="models\DBConnection.cs" />
     <Compile Include="models\Parchment.cs" />
     <Compile Include="models\ParchmentRequest.cs" />
     <Compile Include="models\Qualification.cs" />
@@ -166,7 +167,10 @@
   <ItemGroup />
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.1.0</Version>
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data">
+      <Version>8.0.16</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

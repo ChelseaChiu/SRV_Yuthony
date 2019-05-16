@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid Background="#be1428">
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="2,2,2,30">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="2,2,2,30" d:DataContext="{Binding Items[0]}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="1*" />
@@ -28,8 +28,15 @@
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
                 <StackPanel VerticalAlignment="top" HorizontalAlignment="Center" Orientation="Vertical">
-                    <TextBlock x:Name="txbStuName" HorizontalAlignment="left" Text="Student Name" VerticalAlignment="Center" Foreground="Black" FontSize="16" Margin="5"/>
-                    <TextBlock x:Name="txbStuID" HorizontalAlignment="left" Text="Student ID" VerticalAlignment="Center" Foreground="Black" FontSize="16" Margin="5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="left" Text="Student Name: " VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="5"/>
+                        <TextBlock x:Name="txbStuLName" HorizontalAlignment="left" Text="{Binding FirstName}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="5"/>
+                        <TextBlock x:Name="txbStuName" HorizontalAlignment="left" Text="{Binding LastName}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock HorizontalAlignment="left" Text="Student ID: " VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="5"/>
+                        <TextBlock x:Name="txbStuID" HorizontalAlignment="left" Text="{Binding UserID }" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="5"/>
+                    </StackPanel>
                     <ComboBox Foreground="Black" BorderBrush="Black" FontSize="10" PlaceholderText="Select Qualification">
                         <ComboBoxItem Content="Cert3" />
                         <ComboBoxItem Content="Cert4" />

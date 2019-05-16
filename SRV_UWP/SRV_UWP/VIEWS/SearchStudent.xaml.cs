@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,9 +28,20 @@ namespace SRV_UWP.views
             this.InitializeComponent();
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        private async void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Result_Lecturer_View));  //need to pass parameter to the next page for the future development
+            string studentId = txbStudentId.Text;
+            if (!string.IsNullOrEmpty(studentId))
+            {
+                Frame.Navigate(typeof(Result_Lecturer_View), studentId);
+            }
+            else
+            {
+                var message = new MessageDialog("Please enter student ID");
+                await message.ShowAsync();
+            }    
+            
+            
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
