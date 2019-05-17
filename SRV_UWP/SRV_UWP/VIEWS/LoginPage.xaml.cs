@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SRV_UWP.models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,9 +30,21 @@ namespace SRV_UWP.views
         }
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //Need login check before page navigation
-            //Frame.Navigate(typeof(Result_Student_View));     //If user is student          
-            Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+            //need method to identify if the user is a student or a lecturer
+            string userid = txtId.Text;
+            string password = txtPassword.Password.ToString();
+            User user = new User();
+            if (user.Login(userid,password))  //call Login method from User class
+            {
+                //Frame.Navigate(typeof(Result_Student_View));     //If user is student          
+                Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+            }
+            else
+            {
+                var message = new MessageDialog("Please enter valid ID and password");
+                await message.ShowAsync();
+            }
+
         }
     }
 }

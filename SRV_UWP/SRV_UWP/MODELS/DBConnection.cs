@@ -10,9 +10,6 @@ namespace SRV_UWP.models
 {
     public class DBConnection
     {
-        public DBConnection()
-        {
-        }
         private MySqlConnection connection = null;
         private string server;
         private string database = String.Empty;
@@ -36,10 +33,20 @@ namespace SRV_UWP.models
         }
         public bool IsConnect()
         {
-            server = "studentserver.com.au";
-            database = "admin_it_studies_dev";
-            user = "admin_srv-ya";
-            password = "Passw0rd!@#";
+            //   connect to default database on student server 
+            /*   
+               server = "studentserver.com.au";
+               database = "admin_it_studies_dev";
+               user = "admin_srv-ya";
+               password = "Passw0rd!@#";
+            */
+
+            //   connect to custimized database on localhost
+            server = "localhost";
+            database = "srv_db";
+            user = "root";
+            password = "mysql";
+            //
             port = "3306";
             sslM = "none";
             bool result = false;

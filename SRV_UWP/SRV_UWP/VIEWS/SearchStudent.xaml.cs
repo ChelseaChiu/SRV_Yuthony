@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SRV_UWP.models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,7 +34,17 @@ namespace SRV_UWP.views
             string studentId = txbStudentId.Text;
             if (!string.IsNullOrEmpty(studentId))
             {
-                Frame.Navigate(typeof(Result_Lecturer_View), studentId);
+                Student student = new Student();
+                student = student.GetStudentById(studentId);
+                if (string.IsNullOrEmpty(student.FirstName))
+                {
+                    var message = new MessageDialog("Invalid Student ID, not in database");
+                    await message.ShowAsync();
+                }
+                else
+                {
+                    Frame.Navigate(typeof(Result_Lecturer_View), studentId);
+                }
             }
             else
             {

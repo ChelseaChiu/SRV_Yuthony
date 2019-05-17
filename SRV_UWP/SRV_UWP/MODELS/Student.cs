@@ -18,10 +18,7 @@ namespace SRV_UWP.models
 
         public Student GetStudentById(string studentId)
         {
-            DBConnection dbCon = new DBConnection
-            {
-                Database = "admin_it_studies_dev"
-            };
+            DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
                 Student student = new Student();
@@ -30,12 +27,12 @@ namespace SRV_UWP.models
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string someStringFromColumnZero = reader.GetString(0);
-                    string someStringFromColumnOne = reader.GetString(1);
-                    string someStringFromColumnTwo = reader.GetString(2);
-                    student.UserID = someStringFromColumnZero;
-                    student.FirstName = someStringFromColumnOne;
-                    student.LastName = someStringFromColumnTwo;
+                    string stringStudentID = reader.GetString(0);
+                    string stringStudentFirstName= reader.GetString(1);
+                    string stringStudentLastName = reader.GetString(2);
+                    student.UserID = stringStudentID;
+                    student.FirstName = stringStudentFirstName;
+                    student.LastName = stringStudentLastName;
                 }
                 dbCon.Close();
                 return student;
