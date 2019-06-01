@@ -1,4 +1,5 @@
-﻿using SRV_UWP.views;
+﻿using SRV_UWP.models;
+using SRV_UWP.views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,9 @@ namespace SRV_UWP
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+        public static Qualification tempQual;
+        public static string tempStudentID;
+        public static Competency tempComp;
         public App()
         {
             this.InitializeComponent();

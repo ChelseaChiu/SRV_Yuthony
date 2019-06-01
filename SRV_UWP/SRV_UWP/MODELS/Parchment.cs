@@ -8,7 +8,10 @@ namespace SRV_UWP.models
 {
     public class Parchment
     {
-        public static string ApprovalDate { get; set; }
-        public static string ApproveBy { get; set; }
+        public string ApprovalDate { get; set; }
+        public string ApproveBy { get; set; }
+        public Student Student { get; set; }
+        public Qualification Qualification { get; set; }
+
     }
 }

@@ -30,18 +30,36 @@ namespace SRV_UWP.views
         }
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            //need method to identify if the user is a student or a lecturer
-            string userid = txtId.Text;
-            string password = txtPassword.Password.ToString();
-            User user = new User();
-            if (user.Login(userid,password))  //call Login method from User class
+            DBConnection dbCon = new DBConnection();
+            if (dbCon.IsConnect())
             {
-                //Frame.Navigate(typeof(Result_Student_View));     //If user is student          
-                Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+                //need method to identify if the user is a student or a lecturer
+                string userid = txtId.Text;
+                string password = txtPassword.Password.ToString();
+                User user = new User();
+                if (user.Login(userid, password))  //call Login method from User class
+                {
+                    Lecturer lecturer = new Lecturer();
+                    if (lecturer.IsLecturerLogIn(userid))
+                    {
+                        Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+                    }
+                    else
+                    {
+                        Frame.Navigate(typeof(Result_Student_View),userid);    //If user is student 
+                    }
+
+
+                }
+                else 
+                {
+                    var message = new MessageDialog("Please enter valid ID and password");
+                    await message.ShowAsync();
+                }
             }
             else
             {
-                var message = new MessageDialog("Please enter valid ID and password");
+                var message = new MessageDialog("Database Connection Error!");
                 await message.ShowAsync();
             }
 

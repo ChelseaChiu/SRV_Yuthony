@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 namespace SRV_UWP.models
 {
     public class ParchmentRequest
+
     {
-        public static string RequestDate { get; set; }
-        public static bool RequestedStatus { get; set; }
+        public Student Student { get; set; }
+        public Qualification Qualification { get; set; }
+        public string RequestDate { get; set; }
+        public bool RequestedStatus { get; set; }
     }
 }

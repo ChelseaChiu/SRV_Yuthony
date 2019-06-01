@@ -102,6 +102,7 @@
     <Compile Include="models\User.cs" />
     <Compile Include="viewmodels\DetailsViewModel.cs" />
     <Compile Include="viewmodels\MainViewModel.cs" />
+    <Compile Include="viewmodels\UpdateViewModel.cs" />
     <Compile Include="views\FurtherAction_Lecturer.xaml.cs">
       <DependentUpon>FurtherAction_Lecturer.xaml</DependentUpon>
     </Compile>
