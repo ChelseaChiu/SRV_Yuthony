@@ -42,10 +42,19 @@ namespace SRV_UWP.models
             */
 
             //   connect to custimized database on localhost
-            server = "localhost";
+/*            server = "localhost";
             database = "srv_db";
             user = "root";
             password = "mysql";
+            //
+            port = "3306";
+            sslM = "none";
+            */
+    //use reomte mysql server
+            server = "remotemysql.com";
+            database = "SqjwZVWCq4";
+            user = "SqjwZVWCq4";
+            password = "hbKCyiClWu";
             //
             port = "3306";
             sslM = "none";
