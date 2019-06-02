@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using SRV_UWP.models;
+﻿using SRV_UWP.models;
 using SRV_UWP.viewmodels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SRV_UWP.views
 {
@@ -44,7 +42,7 @@ namespace SRV_UWP.views
             if (viewModel == null)
             {
                 viewModel = new DetailsViewModel(id);
-                stackStudentDetail.DataContext=viewModel.Student;
+                stackStudentDetail.DataContext = viewModel.Student;
                 Student = viewModel.Student;
                 comboQual.ItemsSource = viewModel.Qualifications;
             }
@@ -57,7 +55,7 @@ namespace SRV_UWP.views
         private async void btnFurtherAction_Click(object sender, RoutedEventArgs e)
         {
             //Navigate to FurtherAction page
-            if (listBoxCompetency.SelectedIndex!=-1)
+            if (listBoxCompetency.SelectedIndex != -1)
             {
                 Competency sComp = new Competency();
                 sComp = listBoxCompetency.SelectedItem as Competency;
@@ -91,7 +89,7 @@ namespace SRV_UWP.views
         private void Select_Qualification(object sender, SelectionChangedEventArgs e)
         {
             Qualification sQual = comboQual.SelectedItem as Qualification;
-            if (sQual!=null)
+            if (sQual != null)
             {
                 stackComp.Visibility = Visibility.Visible;
                 stackReqUnits.DataContext = sQual;
@@ -101,7 +99,7 @@ namespace SRV_UWP.views
                 listBoxCompetency.ItemsSource = compList;
 
                 // set progress bar need to further coding
-                sQual.DoneC = compList.Where(c=>c.CompletionStatus=="C").Count(c => c.TrainingPakckageUsage == "C" );
+                sQual.DoneC = compList.Where(c => c.CompletionStatus == "C").Count(c => c.TrainingPakckageUsage == "C");
                 progressC.Value = sQual.DoneC;
                 sQual.DoneE = compList.Where(c => c.CompletionStatus == "C").Count(c => c.TrainingPakckageUsage == "E");
                 progressE.Value = sQual.DoneE;
@@ -115,20 +113,20 @@ namespace SRV_UWP.views
                 }
                 else
                 {
-                    sQual.DoneTotal =sQual.DoneC + sQual.DoneE + sQual.DoneLE;
+                    sQual.DoneTotal = sQual.DoneC + sQual.DoneE + sQual.DoneLE;
                     progressT.Value = sQual.DoneTotal;
                 }
                 stackUnits.DataContext = sQual;
                 stackProg.DataContext = sQual;
                 App.tempQual = sQual;
             }
-            
+
         }
 
         private async void btnApprove_Click(object sender, RoutedEventArgs e)
         {
             Qualification qual = App.tempQual;
-            if (!Qualification.IsCompleted(qual))  
+            if (!Qualification.IsCompleted(qual))
             {
                 var message1 = new MessageDialog("Can not procced before complete total units", "Further Action Needed");
                 await message1.ShowAsync();
@@ -137,7 +135,7 @@ namespace SRV_UWP.views
             {
                 try
                 {
-                    myLecturer.ApproveParchment(Student,qual.QualCode);
+                    myLecturer.ApproveParchment(Student, qual.QualCode);
                     var message = new MessageDialog("Parchment has been approved", "Approved");
                     await message.ShowAsync();
                 }
@@ -155,12 +153,11 @@ namespace SRV_UWP.views
         {
             try
             {
-                myLecturer.DisApproveParchment(Student,App.tempQual.QualCode);
+                myLecturer.DisApproveParchment(Student, App.tempQual.QualCode);
                 var message = new MessageDialog("Parchment has not been approved", "Not Approved");
                 await message.ShowAsync();
             }
             catch { throw; }
         }
-
     }
 }

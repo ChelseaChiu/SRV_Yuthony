@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SRV_UWP.views
 {
@@ -46,12 +46,12 @@ namespace SRV_UWP.views
                     }
                     else
                     {
-                        Frame.Navigate(typeof(Result_Student_View),userid);    //If user is student 
+                        Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
                     }
 
 
                 }
-                else 
+                else
                 {
                     var message = new MessageDialog("Please enter valid ID and password");
                     await message.ShowAsync();

@@ -5,8 +5,8 @@
     xmlns:local="using:SRV_UWP.views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    >
+    mc:Ignorable="d">
+
     <ScrollViewer VerticalScrollBarVisibility="Visible">
         <Grid Background="#be1428">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="2,2,2,30">
@@ -22,29 +22,29 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Margin="100,0,0,5" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click" VerticalAlignment="Bottom" Height="32"/>
-                    <Button Margin="180,0,0,5" Grid.Row="1" x:Name="btnSearch" Content="Search" Background="Gray" Foreground="White" Click="btnSearch_Click" VerticalAlignment="Bottom"/>
-                    <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
-                        <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
-                        <TextBlock x:Name="txbWelcome" HorizontalAlignment="Center" Text="Welcome to Student Results View" Foreground="Black" FontSize="16" FontWeight="Black"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
-                        <StackPanel VerticalAlignment="top" HorizontalAlignment="Center" Orientation="Vertical">
-                            <StackPanel x:Name="stackStudentDetail" DataContext="{Binding Student}">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock HorizontalAlignment="left" Text="Student Name: " VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
-                                    <TextBlock x:Name="txbStuLName" HorizontalAlignment="left" Text="{Binding FirstName}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
-                                    <TextBlock x:Name="txbStuName" HorizontalAlignment="left" Text="{Binding LastName}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock HorizontalAlignment="left" Text="Student ID: " VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
-                                    <TextBlock x:Name="txbStuID" HorizontalAlignment="left" Text="{Binding UserID}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
-                                </StackPanel>
+                <Button Margin="180,0,0,5" Grid.Row="1" x:Name="btnSearch" Content="Search" Background="Gray" Foreground="White" Click="btnSearch_Click" VerticalAlignment="Bottom"/>
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
+                    <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
+                </StackPanel>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
+                    <TextBlock x:Name="txbWelcome" HorizontalAlignment="Center" Text="Welcome to Student Results View" Foreground="Black" FontSize="16" FontWeight="Black"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                    <StackPanel VerticalAlignment="top" HorizontalAlignment="Center" Orientation="Vertical">
+                        <StackPanel x:Name="stackStudentDetail" DataContext="{Binding Student}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock HorizontalAlignment="left" Text="Student Name: " VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
+                                <TextBlock x:Name="txbStuLName" HorizontalAlignment="left" Text="{Binding FirstName}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
+                                <TextBlock x:Name="txbStuName" HorizontalAlignment="left" Text="{Binding LastName}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
                             </StackPanel>
-                            <ComboBox x:Name="comboQual" Foreground="Black" BorderBrush="Black" FontSize="10" PlaceholderText="Select Qualification" SelectionChanged="Select_Qualification" DisplayMemberPath="QualName" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock HorizontalAlignment="left" Text="Student ID: " VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
+                                <TextBlock x:Name="txbStuID" HorizontalAlignment="left" Text="{Binding UserID}" VerticalAlignment="Center" Foreground="Black" FontSize="12" Margin="2"/>
+                            </StackPanel>
                         </StackPanel>
+                        <ComboBox x:Name="comboQual" Foreground="Black" BorderBrush="Black" FontSize="10" PlaceholderText="Select Qualification" SelectionChanged="Select_Qualification" DisplayMemberPath="QualName" />
                     </StackPanel>
+                </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="vertical" HorizontalAlignment="Left">
                     <StackPanel Orientation="horizontal">
                         <StackPanel Orientation="vertical" HorizontalAlignment="Left">
@@ -117,13 +117,13 @@
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Background="{Binding BackColor}">
                                     <TextBlock Text="{Binding CompletionStatus}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="65" FontSize="10"/>
-                                        <TextBlock Text="{Binding Results}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="43" FontSize="10"/>
-                                        <TextBlock Text="{Binding StudyPlan}" TextWrapping="Wrap"  HorizontalAlignment="Center" Padding="3,0,0,3" Width="62" FontSize="10"/>
-                                        <TextBlock Text="{Binding SubjectCode}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="71" FontSize="10"/>
-                                        <TextBlock Text="{Binding TrainingPakckageUsage}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="52" FontSize="10"/>
-                                        <TextBlock Text="{Binding TafeCode}" TextWrapping="Wrap" HorizontalAlignment="Center"  Padding="3,0,0,3" Width="62" FontSize="10"/>
-                                        <TextBlock Text="{Binding NationalCode}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" FontSize="10" Width="79"/>
-                                        <TextBlock Text="{Binding CompetencyName}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" FontSize="10" Width="345"/>
+                                    <TextBlock Text="{Binding Results}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="43" FontSize="10"/>
+                                    <TextBlock Text="{Binding StudyPlan}" TextWrapping="Wrap"  HorizontalAlignment="Center" Padding="3,0,0,3" Width="62" FontSize="10"/>
+                                    <TextBlock Text="{Binding SubjectCode}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="71" FontSize="10"/>
+                                    <TextBlock Text="{Binding TrainingPakckageUsage}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="52" FontSize="10"/>
+                                    <TextBlock Text="{Binding TafeCode}" TextWrapping="Wrap" HorizontalAlignment="Center"  Padding="3,0,0,3" Width="62" FontSize="10"/>
+                                    <TextBlock Text="{Binding NationalCode}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" FontSize="10" Width="79"/>
+                                    <TextBlock Text="{Binding CompetencyName}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" FontSize="10" Width="345"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -139,4 +139,3 @@
         </Grid>
     </ScrollViewer>
 </Page>
-

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SRV_UWP.models
 {
-    public class Student:User
+    public class Student : User
     {
         public Student GetStudentById(string studentId)
         {
@@ -21,7 +21,7 @@ namespace SRV_UWP.models
                 while (reader.Read())
                 {
                     string stringStudentID = reader.GetString(0);
-                    string stringStudentFirstName= reader.GetString(1);
+                    string stringStudentFirstName = reader.GetString(1);
                     string stringStudentLastName = reader.GetString(2);
                     student.UserID = stringStudentID;
                     student.FirstName = stringStudentFirstName;
@@ -56,7 +56,7 @@ namespace SRV_UWP.models
             }
             else { return false; }
         }
-        public void RequestParchment(Student student,string qualificationID)
+        public void RequestParchment(Student student, string qualificationID)
         {
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
@@ -90,12 +90,12 @@ namespace SRV_UWP.models
                         throw;
                     }
                 }
-                    dbCon.Close();
+                dbCon.Close();
             }
-            
+
         }
 
-        public bool IsParchmentRequested(Student student,string qualificationID)  //if the value of IsRequested is true 
+        public bool IsParchmentRequested(Student student, string qualificationID)  //if the value of IsRequested is true 
         {
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
@@ -110,11 +110,11 @@ namespace SRV_UWP.models
                     while (reader.Read())
                     {
                         string result = reader.GetString(0);
-                        if (result!="False")
+                        if (result != "False")
                         {
                             isRequested = 1;
                         }
-                        
+
                     }
                     dbCon.Close();
                     if (isRequested != 1)
@@ -129,8 +129,8 @@ namespace SRV_UWP.models
                 catch (Exception)
                 {
                     throw;
-                } 
-                    
+                }
+
             }
             else
             {

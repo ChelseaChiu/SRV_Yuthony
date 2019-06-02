@@ -24,13 +24,13 @@ namespace SRV_UWP
     /// </summary>
     sealed partial class App : Application
     {
+        public static Qualification tempQual;
+        public static string tempStudentID;
+        public static Competency tempComp;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
-        public static Qualification tempQual;
-        public static string tempStudentID;
-        public static Competency tempComp;
         public App()
         {
             this.InitializeComponent();
@@ -44,12 +44,6 @@ namespace SRV_UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = false;
-            }
-#endif
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

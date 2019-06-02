@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
     <Grid Background="#be1428">
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="2,2,2,30">
             <Grid.RowDefinitions>
@@ -29,4 +30,3 @@
         <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>
     </Grid>
 </Page>
-

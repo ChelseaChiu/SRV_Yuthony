@@ -28,4 +28,3 @@
         <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>
     </Grid>
 </Page>
-

@@ -6,13 +6,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Popups;
 
 namespace SRV_UWP.viewmodels
 {
-    public class DetailsViewModel:INotifyPropertyChanged
+    public class DetailsViewModel : INotifyPropertyChanged
     {
-        private Student student=new Student();      
+        private Student student = new Student();
 
         public event PropertyChangedEventHandler PropertyChanged;
         void RaisePropertyChanged(string propname)
@@ -37,10 +36,12 @@ namespace SRV_UWP.viewmodels
         }
 
         private ObservableCollection<Qualification> qualifications;
-        public ObservableCollection<Qualification> Qualifications {
+        public ObservableCollection<Qualification> Qualifications
+        {
 
             get { return qualifications; }
-            set {
+            set
+            {
                 if (qualifications != value)
                 {
                     qualifications = value;
@@ -56,5 +57,4 @@ namespace SRV_UWP.viewmodels
         }
 
     }
-
 }

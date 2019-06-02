@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="918b070f-6355-40c0-9a37-1acffd02643b"
-    Publisher="CN=001077495"
+    Name="7cf63d0a-bf69-4401-92cd-d743fbbd715b"
+    Publisher="CN=chels"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="918b070f-6355-40c0-9a37-1acffd02643b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="7cf63d0a-bf69-4401-92cd-d743fbbd715b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>SRV_UWP</DisplayName>
-    <PublisherDisplayName>001077495</PublisherDisplayName>
+    <PublisherDisplayName>chels</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

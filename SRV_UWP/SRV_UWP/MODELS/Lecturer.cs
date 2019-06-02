@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Popups;
 
 namespace SRV_UWP.models
 {
-    public class Lecturer:User
+    public class Lecturer : User
     {
         public string Department { get; }
-  /*      private void UpdateCompetency(string newCompletionStatus)
-        {
-            Competency.CompletionStatus = newCompletionStatus;
-        }
-    */
-    private Student SearchStudentById(string studentId)
+        /*      private void UpdateCompetency(string newCompletionStatus)
+              {
+                  Competency.CompletionStatus = newCompletionStatus;
+              }
+          */
+        private Student SearchStudentById(string studentId)
         {
             Student student = new Student();
             if (student.UserID == studentId)  //TODO
@@ -32,7 +31,7 @@ namespace SRV_UWP.models
             if (dbCon.IsConnect())
             {
                 Lecturer myLecturer = new Lecturer();
-                string query = String.Format("SELECT * FROM lecturer WHERE LecturerID="+ inUserId);
+                string query = String.Format("SELECT * FROM lecturer WHERE LecturerID=" + inUserId);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -81,7 +80,7 @@ namespace SRV_UWP.models
             if (dbCon.IsConnect())
             {
                 string studentID = student.UserID;
-                if (!lecturer.IsParchmentInDB(student,qualificationID)) //if no record, insert a new one
+                if (!lecturer.IsParchmentInDB(student, qualificationID)) //if no record, insert a new one
                 {
                     string date = DateTime.Now.ToString("yyyy'-'MM'-'dd");
                     string query1 = String.Format("insert into parchement (IssueDate,StudentID,QualificationID) values('{0}','{1}','{2}')", date, studentID, qualificationID);
@@ -96,7 +95,7 @@ namespace SRV_UWP.models
                     }
                 }
                 else
-                { 
+                {
                     // TODO
                 }
                 dbCon.Close();

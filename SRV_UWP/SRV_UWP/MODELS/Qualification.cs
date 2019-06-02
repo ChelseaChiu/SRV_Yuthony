@@ -1,7 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,11 +31,11 @@ namespace SRV_UWP.models
             int listedE = sQual.ReqListedElectedUnits;
             int total = sQual.TotalUnits;
             int afterCore = total - sQual.DoneC;
-            if (sQual.DoneC<core)
+            if (sQual.DoneC < core)
             {
                 return false;
             }
-            else if(sQual.DoneE+sQual.DoneLE<afterCore)
+            else if (sQual.DoneE + sQual.DoneLE < afterCore)
             {
                 return false;
             }
@@ -53,7 +52,7 @@ namespace SRV_UWP.models
             {
                 List<Qualification> qualificationList = new List<Qualification>();
                 string query = String.Format("select * from qualification inner join student_qualification on " +
-                    "qualification.QualificationID=student_qualification.QualificationID where StudentID="+ studentID);
+                    "qualification.QualificationID=student_qualification.QualificationID where StudentID=" + studentID);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())

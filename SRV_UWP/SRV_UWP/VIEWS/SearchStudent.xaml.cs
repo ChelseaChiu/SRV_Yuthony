@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SRV_UWP.views
 {
@@ -50,9 +50,9 @@ namespace SRV_UWP.views
             {
                 var message = new MessageDialog("Please enter student ID");
                 await message.ShowAsync();
-            }    
-            
-            
+            }
+
+
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)

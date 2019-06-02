@@ -32,7 +32,7 @@ namespace SRV_UWP.models
             get { return additionalComments; }
             set
             {
-                if (additionalComments!=value)
+                if (additionalComments != value)
                 {
                     additionalComments = value;
                     RaisePropertyChanged("AdditionalComments");
@@ -75,7 +75,7 @@ namespace SRV_UWP.models
             if (dbCon.IsConnect())
             {
                 ObservableCollection<Competency> competencyList = new ObservableCollection<Competency>();
-                string query = String.Format("select SC.Completion_Status, SC.GradeTypeID, SC.GradeSemYear, S.SubjectID, SC.CompetencyID_Tafe, QC.Training_Package_UsageID, C.NationalCompCode, C.CompetencName, SC.ResultComment from student_competency AS SC inner join qualification_competency AS QC on SC.CompetencyID_Tafe=QC.CompetencyID_Tafe AND SC.QualificationID=QC.QualificationID inner join competency AS C on QC.CompetencyID_Tafe=C.CompetencyID_Tafe inner join subject AS S on C.SubjectID=S.SubjectID WHERE SC.StudentID='{0}' AND SC.QualificationID='{1}' group by CompetencyID_Tafe order by Completion_Status, GradeSemYear,SubjectID", studentID,qualificationID);
+                string query = String.Format("select SC.Completion_Status, SC.GradeTypeID, SC.GradeSemYear, S.SubjectID, SC.CompetencyID_Tafe, QC.Training_Package_UsageID, C.NationalCompCode, C.CompetencName, SC.ResultComment from student_competency AS SC inner join qualification_competency AS QC on SC.CompetencyID_Tafe=QC.CompetencyID_Tafe AND SC.QualificationID=QC.QualificationID inner join competency AS C on QC.CompetencyID_Tafe=C.CompetencyID_Tafe inner join subject AS S on C.SubjectID=S.SubjectID WHERE SC.StudentID='{0}' AND SC.QualificationID='{1}' group by CompetencyID_Tafe order by Completion_Status, GradeSemYear,SubjectID", studentID, qualificationID);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -121,7 +121,7 @@ namespace SRV_UWP.models
             else { return null; }
         }
 
-        public bool UpdateToDB(string studentID, string qualificationID, string competencyID,string status, string comments)
+        public bool UpdateToDB(string studentID, string qualificationID, string competencyID, string status, string comments)
         {
 
             DBConnection dbCon = new DBConnection();
@@ -133,8 +133,8 @@ namespace SRV_UWP.models
                 var cmd2 = new MySqlCommand(query2, dbCon.Connection);
                 try
                 {
-                    var c1=cmd1.ExecuteNonQuery();
-                    var c2=cmd2.ExecuteNonQuery();
+                    var c1 = cmd1.ExecuteNonQuery();
+                    var c2 = cmd2.ExecuteNonQuery();
 
                     return true;
 

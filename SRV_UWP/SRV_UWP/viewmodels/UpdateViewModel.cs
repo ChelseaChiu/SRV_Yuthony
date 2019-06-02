@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SRV_UWP.viewmodels
 {
-    public class UpdateViewModel:INotifyPropertyChanged
+    public class UpdateViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         void RaisePropertyChanged(string propname)
@@ -68,11 +68,11 @@ namespace SRV_UWP.viewmodels
         Qualification sQual = App.tempQual;
         public UpdateViewModel(Competency sComp)
         {
-            
+
             this.Student = student.GetStudentById(studentID);
             this.Qualification = sQual;
             this.Qualifications = new ObservableCollection<Qualification>(Qualification.GetQualificationList(Student.UserID).ToList().OrderBy(q => q.QualName));
-            this.Competency = sComp;        
+            this.Competency = sComp;
         }
 
     }

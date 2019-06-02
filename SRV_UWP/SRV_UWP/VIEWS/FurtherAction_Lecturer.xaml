@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-               <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
+                <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
                     <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
                 </StackPanel>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2">
@@ -136,4 +136,3 @@
         </Grid>
     </ScrollViewer>
 </Page>
-

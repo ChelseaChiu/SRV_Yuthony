@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SRV_UWP.views
 {
@@ -49,7 +49,7 @@ namespace SRV_UWP.views
                 foreach (var qual in viewModel.Qualifications)
                 {
                     List<Competency> compList = new List<Competency>();
-                    compList = Competency.GetCompetencyList(Student.UserID, qual.QualCode).Where(c=>c.CompletionStatus=="C").ToList();
+                    compList = Competency.GetCompetencyList(Student.UserID, qual.QualCode).Where(c => c.CompletionStatus == "C").ToList();
                     qual.Competencies = compList;
                 }
             }
@@ -63,7 +63,7 @@ namespace SRV_UWP.views
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
 
-            Frame.Navigate(typeof(Result_Lecturer_View),Student.UserID); //Back to Prevoius Page
+            Frame.Navigate(typeof(Result_Lecturer_View), Student.UserID); //Back to Prevoius Page
             App.tempQual = null;
             App.tempComp = null;
         }
@@ -75,7 +75,7 @@ namespace SRV_UWP.views
             string qualID = sQual.QualCode;
             string compID = sComp.TafeCode;
             string status;
-            if (comboStatus.SelectedIndex!=-1)
+            if (comboStatus.SelectedIndex != -1)
             {
                 status = ((ComboBoxItem)comboStatus.SelectedItem).Content.ToString();
             }
@@ -84,7 +84,7 @@ namespace SRV_UWP.views
                 status = sComp.CompletionStatus;
             }
             string comment = txbComment.Text;
-            if (sComp.UpdateToDB(studentID,qualID,compID,status,comment))
+            if (sComp.UpdateToDB(studentID, qualID, compID, status, comment))
             {
                 var message = new MessageDialog("Update successful.");
                 await message.ShowAsync();

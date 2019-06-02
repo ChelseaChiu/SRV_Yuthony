@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SRV_UWP.views
 {
@@ -105,13 +105,13 @@ namespace SRV_UWP.views
             {
                 if (Student.IsParchmentRequested(Student, Student.Qualification.QualCode))
                 {
-                    var message1 = new MessageDialog("Your request is in progress","Please wait");
+                    var message1 = new MessageDialog("Your request is in progress", "Please wait");
                     await message1.ShowAsync();
                 }
                 else
                 {
                     Student.RequestParchment(Student, Student.Qualification.QualCode);
-                    var message = new MessageDialog("Your request is submitted.","Success");
+                    var message = new MessageDialog("Your request is submitted.", "Success");
                     await message.ShowAsync();
                 }
 
@@ -121,7 +121,7 @@ namespace SRV_UWP.views
 
                 throw;
             }
-            
+
         }
     }
 }

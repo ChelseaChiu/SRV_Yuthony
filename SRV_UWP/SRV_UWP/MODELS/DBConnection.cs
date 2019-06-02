@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Windows.UI.Popups;
 
 namespace SRV_UWP.models
 {
@@ -42,15 +41,15 @@ namespace SRV_UWP.models
             */
 
             //   connect to custimized database on localhost
-/*            server = "localhost";
+ /*           server = "localhost";
             database = "srv_db";
             user = "root";
             password = "mysql";
             //
             port = "3306";
             sslM = "none";
-            */
-    //use reomte mysql server
+*/
+//use reomte mysql server
             server = "remotemysql.com";
             database = "SqjwZVWCq4";
             user = "SqjwZVWCq4";
@@ -77,7 +76,7 @@ namespace SRV_UWP.models
                 }
                 catch (MySqlException ex)
                 {
-                    return false;                   
+                    return false;
                 }
 
             }
