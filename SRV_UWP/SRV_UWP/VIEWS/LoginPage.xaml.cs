@@ -34,6 +34,10 @@ namespace SRV_UWP.views
             if (dbCon.IsConnect())
             {
                 //need method to identify if the user is a student or a lecturer
+
+                /* disable login function for database collabration 26/08/2019 - Yuchun
+                 * at this stage, only validate database connection 
+                 * 
                 string userid = txtId.Text;
                 string password = txtPassword.Password.ToString();
                 User user = new User();
@@ -57,6 +61,10 @@ namespace SRV_UWP.views
                     await message.ShowAsync();
                 }
             }
+            */
+                Frame.Navigate(typeof(SearchStudent));  // navigate to search student page for this stage 26/08/2019 - Yuchun
+            }
+
             else
             {
                 var message = new MessageDialog("Database Connection Error!");
