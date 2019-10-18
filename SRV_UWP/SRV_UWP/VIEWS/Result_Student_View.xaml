@@ -78,16 +78,16 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0,3,0,0" Orientation="Vertical" x:Name="stackComp" Visibility="Collapsed" >
-                    <TextBlock Text=" Competency Compeletion Status: *C-Completed / *P-Pending / *NS-Not Started" FontSize="10" Padding="2"/>
+                 <!--   <TextBlock Text=" Competency Compeletion Status: *C-Completed / *P-Pending / *NS-Not Started" FontSize="10" Padding="2"/>   -->
                     <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" >
-                        <StackPanel BorderThickness="1,1,0,1" BorderBrush="Black" HorizontalAlignment="Center" >
+                     <!--   <StackPanel BorderThickness="1,1,0,1" BorderBrush="Black" HorizontalAlignment="Center" >
                             <TextBlock Text="Completion Status" TextWrapping="Wrap" FontWeight="Black" FontSize="10" Padding="3,0,0,3" Width="65" HorizontalAlignment="Center" />
-                        </StackPanel>
+                        </StackPanel>   -->
                         <StackPanel BorderThickness="1,1,0,1" BorderBrush="Black" HorizontalAlignment="Center">
                             <TextBlock Text="Result" TextWrapping="Wrap" FontWeight="Black" FontSize="10" Padding="3,0,0,3" Width="40" HorizontalAlignment="Center" />
                         </StackPanel>
                         <StackPanel BorderThickness="1,1,0,1" BorderBrush="Black" HorizontalAlignment="Center">
-                            <TextBlock Text="Study Plan" TextWrapping="Wrap" FontWeight="Black" FontSize="10" Padding="3,0,0,3" Width="60" HorizontalAlignment="Center"/>
+                            <TextBlock Text="YearSemester" TextWrapping="Wrap" FontWeight="Black" FontSize="10" Padding="3,0,0,3" Width="60" HorizontalAlignment="Center"/>
                         </StackPanel>
                         <StackPanel BorderThickness="1,1,0,1" BorderBrush="Black" HorizontalAlignment="Center">
                             <TextBlock Text="Subject Code" TextWrapping="Wrap" FontWeight="Black" FontSize="10" Padding="3,0,0,3" Width="70" HorizontalAlignment="Center"/>
@@ -114,7 +114,7 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Center" BorderBrush="Black" BorderThickness="1" Background="{Binding BackColor}">
-                                    <TextBlock Text="{Binding CompletionStatus}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="65" FontSize="10"/>
+                                   <!-- <TextBlock Text="{Binding CompletionStatus}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="65" FontSize="10"/>  -->
                                     <TextBlock Text="{Binding Results}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="43" FontSize="10"/>
                                     <TextBlock Text="{Binding StudyPlan}" TextWrapping="Wrap"  HorizontalAlignment="Center" Padding="3,0,0,3" Width="62" FontSize="10"/>
                                     <TextBlock Text="{Binding SubjectCode}" TextWrapping="Wrap" HorizontalAlignment="Center" Padding="3,0,0,3" Width="71" FontSize="10"/>
@@ -128,7 +128,7 @@
                     </ListBox>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button  HorizontalAlignment="Center" x:Name="btnReqParche" Content="Request Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" Click="Req_Parchment_Click" Visibility="Collapsed"/>
+                    <Button  HorizontalAlignment="Center" x:Name="btnReqParche" IsEnabled="false" Content="Request Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" Click="Req_Parchment_Click" Visibility="Collapsed"/>
                 </StackPanel>
             </Grid>
             <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>

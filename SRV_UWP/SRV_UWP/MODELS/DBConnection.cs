@@ -33,31 +33,23 @@ namespace SRV_UWP.models
         public bool IsConnect()
         {
             //   connect to default database on student server 
-            /*   
+               
                server = "studentserver.com.au";
                database = "admin_it_studies_dev";
                user = "admin_srv-ya";
                password = "Passw0rd!@#";
-            */
+            
 
             //   connect to custimized database on localhost
-            server = "localhost";
-            database = "srv_db";
-            user = "root";
-            password = "mysql";
+            //server = "localhost";
+            //database = "srv_db";
+            //user = "root";
+            //password = "mysql";
             //
             port = "3306";
             sslM = "none";
 
-//use reomte mysql server
- /*           server = "remotemysql.com";
-            database = "SqjwZVWCq4";
-            user = "SqjwZVWCq4";
-            password = "hbKCyiClWu";
-            //
-            port = "3306";
-            sslM = "none";
-  */
+
     bool result = false;
 
             if (Connection == null)

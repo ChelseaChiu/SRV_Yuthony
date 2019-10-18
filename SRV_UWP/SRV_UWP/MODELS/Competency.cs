@@ -75,22 +75,28 @@ namespace SRV_UWP.models
             if (dbCon.IsConnect())
             {
                 ObservableCollection<Competency> competencyList = new ObservableCollection<Competency>();
-                string query = String.Format("select SC.Completion_Status, SC.GradeTypeID, SC.GradeSemYear, S.SubjectID, SC.CompetencyID_Tafe, QC.Training_Package_UsageID, C.NationalCompCode, C.CompetencName, SC.ResultComment from student_competency AS SC inner join qualification_competency AS QC on SC.CompetencyID_Tafe=QC.CompetencyID_Tafe AND SC.QualificationID=QC.QualificationID inner join competency AS C on QC.CompetencyID_Tafe=C.CompetencyID_Tafe inner join subject AS S on C.SubjectID=S.SubjectID WHERE SC.StudentID='{0}' AND SC.QualificationID='{1}' group by CompetencyID_Tafe order by Completion_Status, GradeSemYear,SubjectID", studentID, qualificationID);
+
+                //for provided DB 19/10/2019 yuchun
+                //below are queries for customise db
+                string query = String.Format("select SG.TermCode, SG.TermYear, SG.Grade,CD.SubjectCode, CD.TafeCompCode, C.NationalCompCode, C.CompetencyName, CQ.CompTypeCode " +
+                    "from student_grade AS SG inner join crn_detail AS CD on SG.CRN = CD.CRN left join competency AS C ON CD.TafeCompCode = C.TafeCompCode " +
+                    "inner join competency_qualification AS CQ on CQ.NationalCompCode = C.NationalCompCode where SG.StudentID = '{0}' AND CQ.QualCode = '{1}' " +
+                    "order by TermYear, TermCode, CompTypeCode;", studentID, qualificationID);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string status = reader.GetString(0);
-                    string result = reader.GetString(1);
-                    string semYear = reader.GetString(2);
+                    //string status = reader.GetString(0);
+                    string result = reader.GetString(2);
+                    string semYear = string.Format("{0}S{1}",reader.GetString(1),reader.GetString(0));
                     string subjectID = reader.GetString(3);
                     string tafeCompID = reader.GetString(4);
-                    string trainingUsage = reader.GetString(5);
-                    string nationalCompID = reader.GetString(6);
-                    string compName = reader.GetString(7);
-                    string comment = reader.GetString(8);
+                    string trainingUsage = reader.GetString(7);
+                    string nationalCompID = reader.GetString(5);
+                    string compName = reader.GetString(6);
+                    //string comment = reader.GetString(8);
                     Competency comp = new Competency();
-                    comp.CompletionStatus = status;
+                    
                     comp.Results = result;
                     comp.StudyPlan = semYear;
                     comp.SubjectCode = subjectID;
@@ -98,26 +104,70 @@ namespace SRV_UWP.models
                     comp.TafeCode = tafeCompID;
                     comp.NationalCode = nationalCompID;
                     comp.CompetencyName = compName;
-                    comp.AdditionalComments = comment;
-                    if (status == "C")
+                    //comp.AdditionalComments = comment;
+                    if (result == "PA")
                     {
                         comp.BackColor = "LightBlue";
                     }
-                    else if (status == "P")
-                    {
-                        comp.BackColor = "LightGreen";
-                    }
-                    else if (status == "NS")
-                    {
-                        comp.BackColor = "LightGray";
-                    }
                     else { comp.BackColor = "White"; }
-
                     competencyList.Add(comp);
                 }
                 dbCon.Close();
                 return competencyList;
             }
+
+
+
+            //below are queries for customise db
+            /*
+            string query = String.Format("select SC.Completion_Status, SC.GradeTypeID, SC.GradeSemYear, S.SubjectID, SC.CompetencyID_Tafe, QC.Training_Package_UsageID, 
+            C.NationalCompCode, C.CompetencName, SC.ResultComment from student_competency AS SC inner join qualification_competency 
+            AS QC on SC.CompetencyID_Tafe=QC.CompetencyID_Tafe AND SC.QualificationID=QC.QualificationID inner join competency AS C 
+            on QC.CompetencyID_Tafe=C.CompetencyID_Tafe inner join subject AS S on C.SubjectID=S.SubjectID 
+            WHERE SC.StudentID='{0}' AND SC.QualificationID='{1}' group by CompetencyID_Tafe order by Completion_Status, GradeSemYear,SubjectID", studentID, qualificationID);
+            var cmd = new MySqlCommand(query, dbCon.Connection);
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                string status = reader.GetString(0);
+                string result = reader.GetString(1);
+                string semYear = reader.GetString(2);
+                string subjectID = reader.GetString(3);
+                string tafeCompID = reader.GetString(4);
+                string trainingUsage = reader.GetString(5);
+                string nationalCompID = reader.GetString(6);
+                string compName = reader.GetString(7);
+                string comment = reader.GetString(8);
+                Competency comp = new Competency();
+                comp.CompletionStatus = status;
+                comp.Results = result;
+                comp.StudyPlan = semYear;
+                comp.SubjectCode = subjectID;
+                comp.TrainingPakckageUsage = trainingUsage;
+                comp.TafeCode = tafeCompID;
+                comp.NationalCode = nationalCompID;
+                comp.CompetencyName = compName;
+                comp.AdditionalComments = comment;
+                if (status == "C")
+                {
+                    comp.BackColor = "LightBlue";
+                }
+                else if (status == "P")
+                {
+                    comp.BackColor = "LightGreen";
+                }
+                else if (status == "NS")
+                {
+                    comp.BackColor = "LightGray";
+                }
+                else { comp.BackColor = "White"; }
+
+                competencyList.Add(comp);
+            }
+            dbCon.Close();
+            return competencyList;
+        }
+        */
             else { return null; }
         }
 

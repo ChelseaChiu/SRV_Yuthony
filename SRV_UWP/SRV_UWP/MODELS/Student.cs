@@ -15,6 +15,8 @@ namespace SRV_UWP.models
             if (dbCon.IsConnect())
             {
                 Student student = new Student();
+                //student table in both database contains the same coloumn
+
                 string query = "SELECT * FROM student WHERE StudentId=" + studentId;
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();

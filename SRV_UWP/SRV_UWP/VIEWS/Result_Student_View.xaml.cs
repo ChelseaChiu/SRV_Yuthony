@@ -74,17 +74,18 @@ namespace SRV_UWP.views
                 listBoxCompetency.ItemsSource = compList;
 
                 // set progress bar need to further coding
-                sQual.DoneC = compList.Where(c => c.CompletionStatus == "C").Count(c => c.TrainingPakckageUsage == "C");
+                sQual.DoneC = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C");
                 progressC.Value = sQual.DoneC;
-                sQual.DoneE = compList.Where(c => c.CompletionStatus == "C").Count(c => c.TrainingPakckageUsage == "E");
+                sQual.DoneE = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "E");
                 progressE.Value = sQual.DoneE;
-                sQual.DoneLE = compList.Where(c => c.CompletionStatus == "C").Count(c => c.TrainingPakckageUsage == "LE");
+                sQual.DoneLE = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "LE") + compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C_SUP");
                 progressLE.Value = sQual.DoneLE;
 
                 if (Qualification.IsCompleted(sQual))
                 {
                     sQual.DoneTotal = sQual.TotalUnits;
                     progressT.Value = sQual.DoneTotal;
+                    btnReqParche.IsEnabled = true;
                 }
                 else
                 {
@@ -96,6 +97,7 @@ namespace SRV_UWP.views
                 btnReqParche.Visibility = Visibility.Visible;
                 Student.Qualification = sQual;
 
+
             }
         }
 
@@ -103,17 +105,17 @@ namespace SRV_UWP.views
         {
             try
             {
-                if (Student.IsParchmentRequested(Student, Student.Qualification.QualCode))
-                {
-                    var message1 = new MessageDialog("Your request is in progress", "Please wait");
-                    await message1.ShowAsync();
-                }
-                else
-                {
-                    Student.RequestParchment(Student, Student.Qualification.QualCode);
+                //if (Student.IsParchmentRequested(Student, Student.Qualification.QualCode))
+                //{
+                //    var message1 = new MessageDialog("Your request is in progress", "Please wait");
+                //    await message1.ShowAsync();
+                //}
+                //else
+                //{
+                    //Student.RequestParchment(Student, Student.Qualification.QualCode);
                     var message = new MessageDialog("Your request is submitted.", "Success");
                     await message.ShowAsync();
-                }
+                //}
 
             }
             catch (Exception)

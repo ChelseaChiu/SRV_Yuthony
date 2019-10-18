@@ -37,33 +37,32 @@ namespace SRV_UWP.views
 
                 /* disable login function for database collabration 26/08/2019 - Yuchun
                  * at this stage, only validate database connection 
-                 * 
+                 */ 
                 string userid = txtId.Text;
-                string password = txtPassword.Password.ToString();
+                //string password = txtPassword.Password.ToString();
                 User user = new User();
-                if (user.Login(userid, password))  //call Login method from User class
+                if (user.Login(userid))  //call Login method from User class
                 {
-                    Lecturer lecturer = new Lecturer();
-                    if (lecturer.IsLecturerLogIn(userid))
-                    {
-                        Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
-                    }
-                    else
-                    {
+                    //Lecturer lecturer = new Lecturer();
+                    //if (lecturer.IsLecturerLogIn(userid))
+                    //{
+                    //    Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+                    //}
+                    //else
+                    //{
                         Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
-                    }
+                    //}
 
 
                 }
                 else
                 {
-                    var message = new MessageDialog("Please enter valid ID and password");
+                    var message = new MessageDialog("Please enter valid ID");
                     await message.ShowAsync();
                 }
             }
-            */
-                Frame.Navigate(typeof(SearchStudent));  // navigate to search student page for this stage 26/08/2019 - Yuchun
-            }
+
+            
 
             else
             {
