@@ -47,10 +47,10 @@ namespace SRV_UWP.models
             //password = "mysql";
             //
             port = "3306";
-            sslM = "none";
+            sslM = "Required";  //Force Encryption- Always use SSL. Deny connection if server does not support SSL.
 
 
-    bool result = false;
+            bool result = false;
 
             if (Connection == null)
             {

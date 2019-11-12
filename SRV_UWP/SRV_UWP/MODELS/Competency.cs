@@ -209,7 +209,7 @@ namespace SRV_UWP.models
                         allCompetencies.Add(comp);
                     }
                     dbCon.Close();
-                    List<Competency> notGradedCompetencies = allCompetencies.Where(x => !gradedCompetencies.Any(e => x.NationalCode.Equals(e.NationalCode))).OrderBy(c=>c.TrainingPakckageUsage).ToList();
+                    List<Competency> notGradedCompetencies = allCompetencies.Where(x => !gradedCompetencies.Any(e => x.NationalCode.Equals(e.NationalCode))).GroupBy(p=>p.NationalCode).Select(a=>a.FirstOrDefault()).OrderBy(c=>c.TrainingPakckageUsage).ToList();
                     return notGradedCompetencies;
                 }
                 else return null;
