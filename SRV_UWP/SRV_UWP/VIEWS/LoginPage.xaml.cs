@@ -27,6 +27,7 @@ namespace SRV_UWP.views
         public LoginPage()
         {
             this.InitializeComponent();
+            App._Usertype = null;
         }
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -41,29 +42,41 @@ namespace SRV_UWP.views
                 string userid = txtId.Text;
                 //string password = txtPassword.Password.ToString();
                 User user = new User();
-                if (user.Login(userid))  //call Login method from User class
+                Lecturer lecturer = new Lecturer();
+                if (!userid.All(char.IsDigit))  //if user login as string
                 {
-                    //Lecturer lecturer = new Lecturer();
-                    //if (lecturer.IsLecturerLogIn(userid))
-                    //{
-                    //    Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
-                    //}
-                    //else
-                    //{
-                        Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
-                    //}
-
-
+                    if (lecturer.IsLecturerNameLogIn(userid))   //check if it is lecturer
+                    {
+                        App._Usertype = "lecturer";
+                        Frame.Navigate(typeof(SearchStudent));
+                    }
+                    else
+                    {
+                        var message = new MessageDialog("Please enter valid ID");
+                        await message.ShowAsync();
+                    }
                 }
                 else
                 {
-                    var message = new MessageDialog("Please enter valid ID");
-                    await message.ShowAsync();
+                    if (lecturer.IsLecturerLogIn(userid))  //call Login method from User class
+                    {
+                        App._Usertype = "lecturer";
+                        Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+                    }
+                    else if (user.Login(userid))
+                    {
+                        App._Usertype = "student";
+                        Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
+                    }
+
+                    else
+                    {
+                        var message = new MessageDialog("Please enter valid ID");
+                        await message.ShowAsync();
+                    }
                 }
             }
-
-            
-
+          
             else
             {
                 var message = new MessageDialog("Database Connection Error!");

@@ -27,6 +27,7 @@ namespace SRV_UWP
         public static Qualification tempQual;
         public static string tempStudentID;
         public static Competency tempComp;
+        public static string _Usertype;
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

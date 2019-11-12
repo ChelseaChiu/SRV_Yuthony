@@ -25,6 +25,45 @@ namespace SRV_UWP.models
             else { return null; }
         }
 
+        public bool IsLecturerNameLogIn(string userName)
+        {
+            DBConnection dbCon = new DBConnection();
+            if (dbCon.IsConnect())
+            {
+                Lecturer myLecturer = new Lecturer();
+                try
+                {
+                    string[] names = userName.Split('.');
+                    string query = String.Format("SELECT * FROM lecturer WHERE GivenName='{0}' AND LastName='{1}'", names[0], names[1]);
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string stringUserID = reader.GetString(0);
+                        myLecturer.UserID = stringUserID;
+                        myLecturer.FirstName = names[0];
+                        myLecturer.LastName = names[1];
+                    }
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+
+                dbCon.Close();
+                if (!string.IsNullOrEmpty(myLecturer.UserID))
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            else { return false; }
+
+
+
+        }
+
         public bool IsLecturerLogIn(string inUserId)
         {
             DBConnection dbCon = new DBConnection();
@@ -72,7 +111,7 @@ namespace SRV_UWP.models
             }
             else { return false; }
         }
-        public void ApproveParchment(Student student, string qualificationID)
+        public static void ApproveParchment(Student student, string qualificationID)
         {
 
             DBConnection dbCon = new DBConnection();
@@ -102,7 +141,7 @@ namespace SRV_UWP.models
             }
 
         }
-        public void DisApproveParchment(Student student, string qualificationID)
+        public static void DisApproveParchment(Student student, string qualificationID)
         {
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())

@@ -129,7 +129,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
-                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel x:Name="lecturerButtonsStaclPanel" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button x:Name="btnApprove" Content="Approve Parchment" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center" Click="btnApprove_Click"/>
                     <Button x:Name="btnDisApprove" Content="Disapprove Parchment" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center" Click="btnDisApprove_Click"/>
                     <Button x:Name="btnFurtherAction" Content="Further Action" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center" Click="btnFurtherAction_Click"/>

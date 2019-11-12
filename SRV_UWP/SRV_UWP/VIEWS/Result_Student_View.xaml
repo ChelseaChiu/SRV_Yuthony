@@ -21,6 +21,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Margin="100,0,0,5" Grid.Row="1" x:Name="btnHome" Content="Log out" Background="Gray" Foreground="White" Click="btnHome_Click" VerticalAlignment="Bottom" Height="32"/>
+                <Button Margin="180,0,0,5" Grid.Row="1" x:Name="btnSearch" Content="Search" Background="Gray" Foreground="White" Click="btnSearch_Click" VerticalAlignment="Bottom" Visibility="Collapsed"/>
                 <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="center" Grid.ColumnSpan="2">
                     <Image x:Name="logo_TAFESA" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/logo_TAFESA.png" MaxHeight="80" />
                 </StackPanel>
@@ -78,7 +79,8 @@
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Padding="0,3,0,0" Orientation="Vertical" x:Name="stackComp" Visibility="Collapsed" >
-                 <!--   <TextBlock Text=" Competency Compeletion Status: *C-Completed / *P-Pending / *NS-Not Started" FontSize="10" Padding="2"/>   -->
+                    <TextBlock Text="LightBlue: Passed competencies;  Grey: Failed Competecies; White: Not graded Competencies" FontSize="10" Padding="2"/>
+                    <!--   <TextBlock Text=" Competency Compeletion Status: *C-Completed / *P-Pending / *NS-Not Started" FontSize="10" Padding="2"/>   -->
                     <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" >
                      <!--   <StackPanel BorderThickness="1,1,0,1" BorderBrush="Black" HorizontalAlignment="Center" >
                             <TextBlock Text="Completion Status" TextWrapping="Wrap" FontWeight="Black" FontSize="10" Padding="3,0,0,3" Width="65" HorizontalAlignment="Center" />
@@ -127,8 +129,13 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </StackPanel>
-                <StackPanel Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel x:Name="studentButtonStackPanel" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
                     <Button  HorizontalAlignment="Center" x:Name="btnReqParche" IsEnabled="false" Content="Request Parchement" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" Click="Req_Parchment_Click" Visibility="Collapsed"/>
+                </StackPanel>
+                <StackPanel x:Name="lecturerButtonsStaclPanel" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" Visibility="Collapsed">
+                    <Button x:Name="btnApprove" Content="Approve Parchment" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center" Click="btnApprove_Click"/>
+                    <Button x:Name="btnDisApprove" Content="Disapprove Parchment" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center" Click="btnDisApprove_Click"/>
+                    <Button x:Name="btnFurtherAction" Content="Further Action" VerticalAlignment="Center"  Background="#be1428" Margin="5" Foreground="white" HorizontalAlignment="Center" Click="btnFurtherAction_Click"/>
                 </StackPanel>
             </Grid>
             <TextBlock x:Name="txbFooter" HorizontalAlignment="Center" Text="Developed by ITWork_Yuthony" VerticalAlignment="Bottom" FontSize="20" Foreground="White"/>

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace SRV_UWP.models
         public int ElectedUnits { get; set; }
         public int ReqListedElectedUnits { get; set; }
         public string CompletionStatus { get; set; }
+        //public ObservableCollection<Competency> Competencies { get; set; }
 
         public int DoneC { get; set; }
         public int DoneE { get; set; }
@@ -53,65 +55,127 @@ namespace SRV_UWP.models
                 List<Qualification> qualificationList = new List<Qualification>();
 
                 //below is the query for provided db
-                string query = String.Format("select * from qualification inner join student_studyplan on qualification.QualCode = student_studyplan.QualCode where student_studyplan.StudentID = "+studentID);
+                string query = String.Format("select * from qualification inner join student_studyplan on qualification.QualCode = student_studyplan.QualCode where student_studyplan.StudentID = " + studentID);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
-                while (reader.Read()) {
-
-                    string tafeQualCode = reader.GetString(2);
-                    string qualID = reader.GetString(0);
-                    string nationalCode = reader.GetString(1);
-                    string qualName = reader.GetString(3);
-                    string totalUnits = reader.GetString(4);
-                    string core = reader.GetString(5);
-                    string elective = reader.GetString(6);
-                    string listedElective = reader.GetString(7);
+                while (reader.Read())
+                {
                     Qualification qualification = new Qualification();
-                    qualification.TafeQualCode = tafeQualCode;
-                    qualification.QualCode = qualID;
-                    qualification.QualName = qualName;
-                    qualification.NationalQualCode = nationalCode;
-                    qualification.TotalUnits = Int32.Parse(totalUnits);
-                    qualification.CoreUnits = Int32.Parse(core);
-                    qualification.ElectedUnits = Int32.Parse(elective);
-                    qualification.ReqListedElectedUnits = Int32.Parse(listedElective);
+                    qualification.QualCode = reader.GetString(0);
+                    qualification.NationalQualCode = reader.GetString(1);
+                    qualification.TafeQualCode = reader.GetString(2);
+                    qualification.QualName = reader.GetString(3);
+                    qualification.TotalUnits = Int32.Parse(reader.GetString(4));
+                    qualification.CoreUnits = Int32.Parse(reader.GetString(5));
+                    qualification.ElectedUnits = Int32.Parse(reader.GetString(6));
+                    qualification.ReqListedElectedUnits = Int32.Parse(reader.GetString(7));
+                    qualification.Competencies = Competency.GetCompetencyList(studentID, qualification.QualCode);
+                    qualification.DoneC = qualification.Competencies.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C");
+                    qualification.DoneE = qualification.Competencies.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "E");
+                    qualification.DoneLE = qualification.Competencies.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "LE") + qualification.Competencies.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C_SUP");
+                    if (IsCompleted(qualification))
+                    {
+                        qualification.DoneTotal = qualification.TotalUnits;
+                    }
+                    else
+                    {
+                        qualification.DoneTotal = qualification.DoneC + qualification.DoneE + qualification.DoneLE;
+                    }
                     qualificationList.Add(qualification);
-
                 }
-
-                    // below is the query for customized db
-                    /*                string query = String.Format("select * from qualification inner join student_qualification on " +
-                                        "qualification.QualificationID=student_qualification.QualificationID where StudentID=" + studentID);
-                                    var cmd = new MySqlCommand(query, dbCon.Connection);
-                                    var reader = cmd.ExecuteReader();
-                                    while (reader.Read())
-                                    {
-                                        string qualID = reader.GetString(0);
-                                        string nationalCode = reader.GetString(1);
-                                        string qualName = reader.GetString(2);
-                                        string totalUnits = reader.GetString(3);
-                                        string core = reader.GetString(4);
-                                        string elective = reader.GetString(5);
-                                        string listedElective = reader.GetString(6);
-                                        Qualification qualification = new Qualification();
-                                        qualification.QualCode = qualID;
-                                        qualification.QualName = qualName;
-                                        qualification.NationalQualCode = nationalCode;
-                                        qualification.TotalUnits = Int32.Parse(totalUnits);
-                                        qualification.CoreUnits = Int32.Parse(core);
-                                        qualification.ElectedUnits = Int32.Parse(elective);
-                                        qualification.ReqListedElectedUnits = Int32.Parse(listedElective);
-                                        qualificationList.Add(qualification);
-                                    }
-                                    */
-                    dbCon.Close();
+                dbCon.Close();
                 return qualificationList;
             }
             else { return null; }
+            /*            DBConnection dbCon = new DBConnection();
+                        if (dbCon.IsConnect())
+                        {
+                            List<Qualification> qualificationList = new List<Qualification>();
+
+                            //below is the query for provided db
+                            string query = String.Format("select * from qualification inner join student_studyplan on qualification.QualCode = student_studyplan.QualCode where student_studyplan.StudentID = "+studentID);
+                            var cmd = new MySqlCommand(query, dbCon.Connection);
+                            var reader = cmd.ExecuteReader();
+                            while (reader.Read()) {
+
+                                string tafeQualCode = reader.GetString(2);
+                                string qualID = reader.GetString(0);
+                                string nationalCode = reader.GetString(1);
+                                string qualName = reader.GetString(3);
+                                string totalUnits = reader.GetString(4);
+                                string core = reader.GetString(5);
+                                string elective = reader.GetString(6);
+                                string listedElective = reader.GetString(7);
+                                Qualification qualification = new Qualification();
+                                qualification.TafeQualCode = tafeQualCode;
+                                qualification.QualCode = qualID;
+                                qualification.QualName = qualName;
+                                qualification.NationalQualCode = nationalCode;
+                                qualification.TotalUnits = Int32.Parse(totalUnits);
+                                qualification.CoreUnits = Int32.Parse(core);
+                                qualification.ElectedUnits = Int32.Parse(elective);
+                                qualification.ReqListedElectedUnits = Int32.Parse(listedElective);
+                                qualificationList.Add(qualification);
+
+                            }
+            */
+            // below is the query for customized db
+            /*                string query = String.Format("select * from qualification inner join student_qualification on " +
+                                "qualification.QualificationID=student_qualification.QualificationID where StudentID=" + studentID);
+                            var cmd = new MySqlCommand(query, dbCon.Connection);
+                            var reader = cmd.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                string qualID = reader.GetString(0);
+                                string nationalCode = reader.GetString(1);
+                                string qualName = reader.GetString(2);
+                                string totalUnits = reader.GetString(3);
+                                string core = reader.GetString(4);
+                                string elective = reader.GetString(5);
+                                string listedElective = reader.GetString(6);
+                                Qualification qualification = new Qualification();
+                                qualification.QualCode = qualID;
+                                qualification.QualName = qualName;
+                                qualification.NationalQualCode = nationalCode;
+                                qualification.TotalUnits = Int32.Parse(totalUnits);
+                                qualification.CoreUnits = Int32.Parse(core);
+                                qualification.ElectedUnits = Int32.Parse(elective);
+                                qualification.ReqListedElectedUnits = Int32.Parse(listedElective);
+                                qualificationList.Add(qualification);
+                            }
+                            */
+
         }
 
         public List<Competency> Competencies { get; set; }
 
+        public static Qualification GetQualification(string qualCode)
+        {
+            Qualification qualification = new Qualification();
+            DBConnection dbCon = new DBConnection();
+            if (dbCon.IsConnect())
+            {
+                string query = String.Format("select * from qualification where qualification.QualCode = '{0}'", qualCode);
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
 
+                    qualification.QualCode = reader.GetString(0);
+                    qualification.NationalQualCode = reader.GetString(1);
+                    qualification.TafeQualCode = reader.GetString(2);
+                    qualification.QualName = reader.GetString(3);
+                    qualification.TotalUnits = Int32.Parse(reader.GetString(4));
+                    qualification.CoreUnits = Int32.Parse(reader.GetString(5));
+                    qualification.ElectedUnits = Int32.Parse(reader.GetString(6));
+                    qualification.ReqListedElectedUnits = Int32.Parse(reader.GetString(7));
+
+                }
+                dbCon.Close();
+                return qualification;
+            }
+            else return null;
+
+        }
     }
 }

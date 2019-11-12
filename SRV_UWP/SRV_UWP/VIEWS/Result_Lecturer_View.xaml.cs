@@ -135,7 +135,7 @@ namespace SRV_UWP.views
             {
                 try
                 {
-                    myLecturer.ApproveParchment(Student, qual.QualCode);
+                    Lecturer.ApproveParchment(Student, qual.QualCode);
                     var message = new MessageDialog("Parchment has been approved", "Approved");
                     await message.ShowAsync();
                 }
@@ -153,7 +153,7 @@ namespace SRV_UWP.views
         {
             try
             {
-                myLecturer.DisApproveParchment(Student, App.tempQual.QualCode);
+                Lecturer.DisApproveParchment(Student, App.tempQual.QualCode);
                 var message = new MessageDialog("Parchment has not been approved", "Not Approved");
                 await message.ShowAsync();
             }

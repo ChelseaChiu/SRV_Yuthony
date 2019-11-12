@@ -142,5 +142,32 @@ namespace SRV_UWP.models
         public Qualification Qualification { get; set; }
 
 
+        public static List<Student> GetStudents()
+        {
+
+            List<Student> students = new List<Student>();
+            DBConnection dbCon = new DBConnection();
+            if (dbCon.IsConnect())
+            {
+                string query = String.Format("select * from student");
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Student student = new Student();
+                    student.UserID = reader.GetString(0);
+                    student.FirstName= reader.GetString(1);
+                    student.LastName = reader.GetString(2);
+                    student.Email = reader.GetString(3);
+                    students.Add(student);
+                }
+                dbCon.Close();
+                return students;
+            }
+            else return null;
+
+        }
+
+
     }
 }

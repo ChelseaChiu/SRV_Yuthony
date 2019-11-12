@@ -24,31 +24,25 @@ namespace SRV_UWP.views
     /// </summary>
     public sealed partial class SearchStudent : Page
     {
+        List<Student> Students;
         public SearchStudent()
         {
             this.InitializeComponent();
+            Students = Student.GetStudents();
+            comboStudents.ItemsSource = Students;
         }
 
         private async void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            string studentId = txbStudentId.Text;
-            if (!string.IsNullOrEmpty(studentId))
+            Student student = comboStudents.SelectedItem as Student;
+            if (student != null)
             {
-                Student student = new Student();
-                student = student.GetStudentById(studentId);
-                if (string.IsNullOrEmpty(student.FirstName))
-                {
-                    var message = new MessageDialog("Invalid Student ID, not in database");
-                    await message.ShowAsync();
-                }
-                else
-                {
-                    Frame.Navigate(typeof(Result_Lecturer_View), studentId);
-                }
+                Frame.Navigate(typeof(Result_Student_View), student.UserID);
+
             }
             else
             {
-                var message = new MessageDialog("Please enter student ID");
+                var message = new MessageDialog("Please select student");
                 await message.ShowAsync();
             }
 

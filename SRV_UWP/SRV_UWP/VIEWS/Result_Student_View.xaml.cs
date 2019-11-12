@@ -44,6 +44,13 @@ namespace SRV_UWP.views
                 stackStudentDetail.DataContext = viewModel.Student;
                 Student = viewModel.Student;
                 comboQual.ItemsSource = viewModel.Qualifications;
+                if (App._Usertype=="lecturer")
+                {
+                    studentButtonStackPanel.Visibility = Visibility.Collapsed;
+                    lecturerButtonsStaclPanel.Visibility = Visibility.Visible;
+                    btnSearch.Visibility = Visibility.Visible;
+                }
+
             }
             else
             {
@@ -69,17 +76,32 @@ namespace SRV_UWP.views
                 stackComp.Visibility = Visibility.Visible;
                 stackReqUnits.DataContext = sQual;
                 stackStudentDetail.DataContext = Student;
-                List<Competency> compList = new List<Competency>();
-                compList = Competency.GetCompetencyList(Student.UserID, sQual.QualCode).ToList();
-                listBoxCompetency.ItemsSource = compList;
+
+                List<Competency> gradedCompetencies = Competency.GetCompetencyList(Student.UserID, sQual.QualCode).ToList();
+                try
+                {
+                    List<Competency> notGradedCompetencies = Competency.GetNotGradedCompetencies(Student.UserID, sQual.QualCode).ToList();
+                    if (notGradedCompetencies != null)
+                    {
+                        gradedCompetencies.AddRange(notGradedCompetencies);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+                
+                listBoxCompetency.ItemsSource = gradedCompetencies;
 
                 // set progress bar need to further coding
-                sQual.DoneC = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C");
+                //sQual.DoneC = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C");
                 progressC.Value = sQual.DoneC;
-                sQual.DoneE = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "E");
+               // sQual.DoneE = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "E");
                 progressE.Value = sQual.DoneE;
-                sQual.DoneLE = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "LE") + compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C_SUP");
+                //sQual.DoneLE = compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "LE") + compList.Where(c => c.Results == "PA").Count(c => c.TrainingPakckageUsage == "C_SUP");
                 progressLE.Value = sQual.DoneLE;
+                App.tempQual = sQual;
 
                 if (Qualification.IsCompleted(sQual))
                 {
@@ -124,6 +146,71 @@ namespace SRV_UWP.views
                 throw;
             }
 
+        }
+
+
+        //functionalities for lecturers
+        private async void btnApprove_Click(object sender, RoutedEventArgs e)
+        {
+            Qualification qual = App.tempQual;
+            if (!Qualification.IsCompleted(qual))
+            {
+                var message1 = new MessageDialog("Can not procced before complete total units", "Further Action Needed");
+                await message1.ShowAsync();
+            }
+            else
+            {
+                try
+                {
+                    //Lecturer.ApproveParchment(Student, qual.QualCode);
+                    var message = new MessageDialog("Parchment has been approved", "Approved");
+                    await message.ShowAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+
+        }
+
+        private async void btnDisApprove_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Lecturer.DisApproveParchment(Student, App.tempQual.QualCode);
+                var message = new MessageDialog("Parchment has not been approved", "Not Approved");
+                await message.ShowAsync();
+            }
+            catch { throw; }
+        }
+
+        private async void btnFurtherAction_Click(object sender, RoutedEventArgs e)
+        {
+            //Navigate to FurtherAction page
+            //if (listBoxCompetency.SelectedIndex != -1)
+            //{
+              //  Competency sComp = new Competency();
+                //sComp = listBoxCompetency.SelectedItem as Competency;
+                //App.tempStudentID = Student.UserID;
+                //Frame.Navigate(typeof(FurtherAction_Lecturer), sComp);
+            //}
+            //else
+            //{
+                var message = new MessageDialog("Sent request to Admin for further action!","Request Sent");
+                await message.ShowAsync();
+            //}
+
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SearchStudent)); //Navigate to Search Student Page
+            App.tempQual = null;
+            App.tempStudentID = null;
+            App.tempComp = null;
         }
     }
 }

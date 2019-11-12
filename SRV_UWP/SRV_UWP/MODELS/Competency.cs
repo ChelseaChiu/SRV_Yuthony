@@ -69,12 +69,13 @@ namespace SRV_UWP.models
             if (eh != null)
                 eh(this, new PropertyChangedEventArgs(propname));
         }
-        public static ObservableCollection<Competency> GetCompetencyList(string studentID, string qualificationID)
+        //get competencies which are graded
+        public static List<Competency> GetCompetencyList(string studentID, string qualificationID)
         {
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
-                ObservableCollection<Competency> competencyList = new ObservableCollection<Competency>();
+                List<Competency> competencyList = new List<Competency>();
 
                 //for provided DB 19/10/2019 yuchun
                 //below are queries for customise db
@@ -109,7 +110,7 @@ namespace SRV_UWP.models
                     {
                         comp.BackColor = "LightBlue";
                     }
-                    else { comp.BackColor = "White"; }
+                    else { comp.BackColor = "Gray"; }
                     competencyList.Add(comp);
                 }
                 dbCon.Close();
@@ -171,6 +172,52 @@ namespace SRV_UWP.models
             else { return null; }
         }
 
+        //get not graded competencies under particular qualification
+        public static List<Competency> GetNotGradedCompetencies(string studentID, string qualificationID)
+        {
+            Qualification qualification = Qualification.GetQualificationList(studentID).First(q => q.QualCode == qualificationID);
+            if (Qualification.IsCompleted(qualification))  //if the qualification is completed, return null for not graded competencies
+            {
+                return null;
+            }
+            else  //if the qualification is not yet completed, return all competencies excluded graded ones
+            {
+                //get graded competencies
+                List<Competency> gradedCompetencies = GetCompetencyList(studentID, qualificationID).ToList();
+
+                //get all potential competencies
+                List<Competency> allCompetencies = new List<Competency>();
+                DBConnection dbCon = new DBConnection();
+                if (dbCon.IsConnect())
+                {
+                    //get all competencies under particular qualification
+                    string query = String.Format("select SC.SubjectCode, C.TafeCompCode, C.NationalCompCode, CQ.CompTypeCode, C.CompetencyName " +
+                                                "from subject_competency AS SC inner join competency AS C on SC.TafeCompCode = C.TafeCompCode" +
+                                                " inner join competency_qualification AS CQ on C.NationalCompCode = CQ.NationalCompCode where CQ.QualCode ='{0}'", qualificationID);
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Competency comp = new Competency();
+                        comp.SubjectCode = reader.GetString(0);
+                        comp.TafeCode = reader.GetString(1);
+                        comp.NationalCode = reader.GetString(2);
+                        comp.TrainingPakckageUsage = reader.GetString(3);
+                        comp.CompetencyName = reader.GetString(4);
+                        comp.Results = "N/A";
+                        comp.StudyPlan = "N/A";
+                        allCompetencies.Add(comp);
+                    }
+                    dbCon.Close();
+                    List<Competency> notGradedCompetencies = allCompetencies.Where(x => !gradedCompetencies.Any(e => x.NationalCode.Equals(e.NationalCode))).OrderBy(c=>c.TrainingPakckageUsage).ToList();
+                    return notGradedCompetencies;
+                }
+                else return null;
+            }
+
+        }
+
+
         public bool UpdateToDB(string studentID, string qualificationID, string competencyID, string status, string comments)
         {
 
@@ -202,5 +249,7 @@ namespace SRV_UWP.models
         }
         public string BackColor
         { get; set; }
+
+
     }
 }

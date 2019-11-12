@@ -11,7 +11,7 @@ namespace SRV_UWP.models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; }
+        public string Email { get; set; }
         public string Phone { get; }
         public string Address { get; }
         public string DOB { get; }
