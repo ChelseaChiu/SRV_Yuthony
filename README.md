@@ -13,13 +13,13 @@ Login Page-
 The system will do a security check and search if the input userid exists in the database and identify if the user is login as a lecturer or a student by the input userid
 
 Search student Page-
-If the user is identified as a lecturer the system will navigates to search student page
-In this page, a combo-box dispplays all students in the system with their student id.
+If the user is identified as a lecturer the system will navigate to search student page.
+In this page, a combo-box dispplays all students in the database with their student id.
 
 Results_Student_View Page-
-After the lecturer selected a certain student or it is just a simple student from login page, system will navigates to this page.
+After the lecturer selected a certain student in serach student page or it is just a simple student from login page, system will navigates to this page.
 It will display the details of a particular student and a combo-box contains all the qualifications which this student intakes.
-with the selection of a particular qualification, the system will display all the competencies and progress through this qualification.
+With the selection of a particular qualification, the system will display all the competencies and progress through this qualification.
 
 -If the qualification is completed (which means: passed units are equal or greater than required units). The student will be able to apply for parchment. Or the lecturer will be able to approve or disapprove the parchment. 
 
