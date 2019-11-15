@@ -31,52 +31,62 @@ namespace SRV_UWP.views
         }
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
-                //need method to identify if the user is a student or a lecturer
 
-                /* disable login function for database collabration 26/08/2019 - Yuchun
-                 * at this stage, only validate database connection 
-                 */ 
-                string userid = txtId.Text;
-                //string password = txtPassword.Password.ToString();
-                User user = new User();
-                Lecturer lecturer = new Lecturer();
-                if (!userid.All(char.IsDigit))  //if user login as string
+                if (txtPassword.Password != "srv")
                 {
-                    if (lecturer.IsLecturerNameLogIn(userid))   //check if it is lecturer
-                    {
-                        App._Usertype = "lecturer";
-                        Frame.Navigate(typeof(SearchStudent));
-                    }
-                    else
-                    {
-                        var message = new MessageDialog("Please enter valid ID");
-                        await message.ShowAsync();
-                    }
+                    var message = new MessageDialog("Invalid Password!", "Warning");
+                    await message.ShowAsync();
                 }
                 else
                 {
-                    if (lecturer.IsLecturerLogIn(userid))  //call Login method from User class
-                    {
-                        App._Usertype = "lecturer";
-                        Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
-                    }
-                    else if (user.Login(userid))
-                    {
-                        App._Usertype = "student";
-                        Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
-                    }
+                    //need method to identify if the user is a student or a lecturer
 
+                    /* disable login function for database collabration 26/08/2019 - Yuchun
+                     * at this stage, only validate database connection 
+                     */
+                    string userid = txtId.Text;
+                    //string password = txtPassword.Password.ToString();
+                    User user = new User();
+                    Lecturer lecturer = new Lecturer();
+                    if (!userid.All(char.IsDigit))  //if user login as string
+                    {
+                        if (lecturer.IsLecturerNameLogIn(userid))   //check if it is lecturer
+                        {
+                            App._Usertype = "lecturer";
+                            Frame.Navigate(typeof(SearchStudent));
+                        }
+                        else
+                        {
+                            var message = new MessageDialog("Please enter valid ID");
+                            await message.ShowAsync();
+                        }
+                    }
                     else
                     {
-                        var message = new MessageDialog("Please enter valid ID");
-                        await message.ShowAsync();
+                        if (lecturer.IsLecturerLogIn(userid))  //call Login method from User class
+                        {
+                            App._Usertype = "lecturer";
+                            Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+                        }
+                        else if (user.Login(userid))
+                        {
+                            App._Usertype = "student";
+                            Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
+                        }
+
+                        else
+                        {
+                            var message = new MessageDialog("Please enter valid ID");
+                            await message.ShowAsync();
+                        }
                     }
                 }
             }
-          
+
             else
             {
                 var message = new MessageDialog("Database Connection Error!");
