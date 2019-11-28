@@ -20,7 +20,7 @@
                 <TextBlock x:Name="txbWelcome" HorizontalAlignment="Center" Text="Welcome to Student Results View" Foreground="Black" FontSize="16" FontWeight="Black"/>
             </StackPanel>
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <TextBox x:Name="txtId" PlaceholderText="Enter your ID" HorizontalAlignment="Center" Text="000896534/000724247" VerticalAlignment="Center" BorderBrush="Black" Width="300" Margin="10" />
+                <TextBox x:Name="txtId" PlaceholderText="Enter your ID" HorizontalAlignment="Center" Text="000896534/000724247/Trevor.Learey" VerticalAlignment="Center" BorderBrush="Black" Width="300" Margin="10" />
                 <PasswordBox x:Name="txtPassword" PlaceholderText="Enter password" HorizontalAlignment="Center" BorderBrush="Black" Width="300" Margin="10"/>
                 <Button x:Name="btnLogin" Content="Log in" HorizontalAlignment="Center" VerticalAlignment="Top"  Background="#be1428" Foreground="White" Margin="10" Click="btnLogin_Click"/>
             </StackPanel>
