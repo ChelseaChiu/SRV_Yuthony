@@ -36,25 +36,20 @@ namespace SRV_UWP.views
             if (dbCon.IsConnect())
             {
 
-                if (txtPassword.Password != "srv")
+                if (txtPassword.Password != User.DEFAULT_PASSWORD)
                 {
                     var message = new MessageDialog("Invalid Password!", "Warning");
                     await message.ShowAsync();
                 }
-                else
+                else  //else password is correct, get data from database
                 {
-                    //need method to identify if the user is a student or a lecturer
-
-                    /* disable login function for database collabration 26/08/2019 - Yuchun
-                     * at this stage, only validate database connection 
-                     */
                     string userid = txtId.Text;
-                    //string password = txtPassword.Password.ToString();
+                    string password = txtPassword.Password;
                     User user = new User();
                     Lecturer lecturer = new Lecturer();
                     if (!userid.All(char.IsDigit))  //if user login as string
                     {
-                        if (lecturer.IsLecturerNameLogIn(userid))   //check if it is lecturer
+                        if (lecturer.IsLecturerNameLogIn(userid))   //check if it is lecturer login with lecturer name
                         {
                             App._Usertype = "lecturer";
                             Frame.Navigate(typeof(SearchStudent));
@@ -65,17 +60,17 @@ namespace SRV_UWP.views
                             await message.ShowAsync();
                         }
                     }
-                    else
+                    else  //else user login as digits
                     {
-                        if (lecturer.IsLecturerLogIn(userid))  //call Login method from User class
+                        if (lecturer.IsLecturerLogIn(userid))  //check if it is lecturer login with lecturer id
                         {
                             App._Usertype = "lecturer";
-                            Frame.Navigate(typeof(SearchStudent));      //If user is lecturer
+                            Frame.Navigate(typeof(SearchStudent));      //user is a lecturer
                         }
                         else if (user.Login(userid))
                         {
                             App._Usertype = "student";
-                            Frame.Navigate(typeof(Result_Student_View), userid);    //If user is student 
+                            Frame.Navigate(typeof(Result_Student_View), userid);    //user is a student 
                         }
 
                         else

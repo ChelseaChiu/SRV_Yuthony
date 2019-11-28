@@ -10,11 +10,7 @@ namespace SRV_UWP.models
     public class Lecturer : User
     {
         public string Department { get; }
-        /*      private void UpdateCompetency(string newCompletionStatus)
-              {
-                  Competency.CompletionStatus = newCompletionStatus;
-              }
-          */
+
         private Student SearchStudentById(string studentId)
         {
             Student student = new Student();
@@ -25,6 +21,32 @@ namespace SRV_UWP.models
             else { return null; }
         }
 
+        public List<Student> GetStudents()
+        {
+            List<Student> students = new List<Student>();
+            DBConnection dbCon = new DBConnection();
+            if (dbCon.IsConnect())
+            {
+                string query = String.Format("select * from student");
+                var cmd = new MySqlCommand(query, dbCon.Connection);
+                var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Student student = new Student();
+                    student.UserID = reader.GetString(0);
+                    student.FirstName = reader.GetString(1);
+                    student.LastName = reader.GetString(2);
+                    student.Email = reader.GetString(3);
+                    students.Add(student);
+                }
+                dbCon.Close();
+                return students;
+            }
+            else return null;
+
+        }
+
+        // a method for lecturers to login with their names
         public bool IsLecturerNameLogIn(string userName)
         {
             DBConnection dbCon = new DBConnection();
@@ -64,19 +86,19 @@ namespace SRV_UWP.models
 
         }
 
-        public bool IsLecturerLogIn(string inUserId)
+        // a method for lecturers to log in with their id
+        public bool IsLecturerLogIn(string id)
         {
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
                 Lecturer myLecturer = new Lecturer();
-                string query = String.Format("SELECT * FROM lecturer WHERE LecturerID=" + inUserId);
+                string query = String.Format("SELECT * FROM lecturer WHERE LecturerID=" + id);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string stringUserID = reader.GetString(0);
-                    myLecturer.UserID = stringUserID;
+                    myLecturer.UserID = reader.GetString(0);
                 }
                 dbCon.Close();
                 if (!string.IsNullOrEmpty(myLecturer.UserID))
@@ -87,6 +109,7 @@ namespace SRV_UWP.models
             }
             else { return false; }
         }
+
         public bool IsParchmentInDB(Student student, string qualificationID)
         {
             DBConnection dbCon = new DBConnection();
@@ -111,6 +134,7 @@ namespace SRV_UWP.models
             }
             else { return false; }
         }
+
         public static void ApproveParchment(Student student, string qualificationID)
         {
 
@@ -135,7 +159,7 @@ namespace SRV_UWP.models
                 }
                 else
                 {
-                    // TODO
+                    //TODO
                 }
                 dbCon.Close();
             }

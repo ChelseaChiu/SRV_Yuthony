@@ -28,7 +28,8 @@ namespace SRV_UWP.views
         public SearchStudent()
         {
             this.InitializeComponent();
-            Students = Student.GetStudents();
+            Lecturer lecturer = new Lecturer();
+            Students = lecturer.GetStudents();
             comboStudents.ItemsSource = Students;
         }
 

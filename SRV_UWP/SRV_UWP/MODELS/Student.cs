@@ -14,26 +14,23 @@ namespace SRV_UWP.models
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
-                Student student = new Student();
-                //student table in both database contains the same coloumn
-
+                Student student = new Student();         
                 string query = "SELECT * FROM student WHERE StudentId=" + studentId;
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string stringStudentID = reader.GetString(0);
-                    string stringStudentFirstName = reader.GetString(1);
-                    string stringStudentLastName = reader.GetString(2);
-                    student.UserID = stringStudentID;
-                    student.FirstName = stringStudentFirstName;
-                    student.LastName = stringStudentLastName;
+                    student.UserID = studentId;
+                    student.FirstName = reader.GetString(1);
+                    student.LastName = reader.GetString(2);
                 }
                 dbCon.Close();
                 return student;
             }
             else return null;
         }
+
+
         public bool IsRequestParchmentInDB(Student student, string qualificationID)
         {
             DBConnection dbCon = new DBConnection();
@@ -58,6 +55,7 @@ namespace SRV_UWP.models
             }
             else { return false; }
         }
+
         public void RequestParchment(Student student, string qualificationID)
         {
             DBConnection dbCon = new DBConnection();
@@ -142,31 +140,7 @@ namespace SRV_UWP.models
         public Qualification Qualification { get; set; }
 
 
-        public static List<Student> GetStudents()
-        {
 
-            List<Student> students = new List<Student>();
-            DBConnection dbCon = new DBConnection();
-            if (dbCon.IsConnect())
-            {
-                string query = String.Format("select * from student");
-                var cmd = new MySqlCommand(query, dbCon.Connection);
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    Student student = new Student();
-                    student.UserID = reader.GetString(0);
-                    student.FirstName= reader.GetString(1);
-                    student.LastName = reader.GetString(2);
-                    student.Email = reader.GetString(3);
-                    students.Add(student);
-                }
-                dbCon.Close();
-                return students;
-            }
-            else return null;
-
-        }
 
 
     }

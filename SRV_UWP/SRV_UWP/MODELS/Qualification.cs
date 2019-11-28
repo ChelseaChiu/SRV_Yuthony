@@ -87,69 +87,13 @@ namespace SRV_UWP.models
                 return qualificationList;
             }
             else { return null; }
-            /*            DBConnection dbCon = new DBConnection();
-                        if (dbCon.IsConnect())
-                        {
-                            List<Qualification> qualificationList = new List<Qualification>();
-
-                            //below is the query for provided db
-                            string query = String.Format("select * from qualification inner join student_studyplan on qualification.QualCode = student_studyplan.QualCode where student_studyplan.StudentID = "+studentID);
-                            var cmd = new MySqlCommand(query, dbCon.Connection);
-                            var reader = cmd.ExecuteReader();
-                            while (reader.Read()) {
-
-                                string tafeQualCode = reader.GetString(2);
-                                string qualID = reader.GetString(0);
-                                string nationalCode = reader.GetString(1);
-                                string qualName = reader.GetString(3);
-                                string totalUnits = reader.GetString(4);
-                                string core = reader.GetString(5);
-                                string elective = reader.GetString(6);
-                                string listedElective = reader.GetString(7);
-                                Qualification qualification = new Qualification();
-                                qualification.TafeQualCode = tafeQualCode;
-                                qualification.QualCode = qualID;
-                                qualification.QualName = qualName;
-                                qualification.NationalQualCode = nationalCode;
-                                qualification.TotalUnits = Int32.Parse(totalUnits);
-                                qualification.CoreUnits = Int32.Parse(core);
-                                qualification.ElectedUnits = Int32.Parse(elective);
-                                qualification.ReqListedElectedUnits = Int32.Parse(listedElective);
-                                qualificationList.Add(qualification);
-
-                            }
-            */
-            // below is the query for customized db
-            /*                string query = String.Format("select * from qualification inner join student_qualification on " +
-                                "qualification.QualificationID=student_qualification.QualificationID where StudentID=" + studentID);
-                            var cmd = new MySqlCommand(query, dbCon.Connection);
-                            var reader = cmd.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                string qualID = reader.GetString(0);
-                                string nationalCode = reader.GetString(1);
-                                string qualName = reader.GetString(2);
-                                string totalUnits = reader.GetString(3);
-                                string core = reader.GetString(4);
-                                string elective = reader.GetString(5);
-                                string listedElective = reader.GetString(6);
-                                Qualification qualification = new Qualification();
-                                qualification.QualCode = qualID;
-                                qualification.QualName = qualName;
-                                qualification.NationalQualCode = nationalCode;
-                                qualification.TotalUnits = Int32.Parse(totalUnits);
-                                qualification.CoreUnits = Int32.Parse(core);
-                                qualification.ElectedUnits = Int32.Parse(elective);
-                                qualification.ReqListedElectedUnits = Int32.Parse(listedElective);
-                                qualificationList.Add(qualification);
-                            }
-                            */
+          
 
         }
 
         public List<Competency> Competencies { get; set; }
 
-        public static Qualification GetQualification(string qualCode)
+        public Qualification GetQualification(string qualCode)
         {
             Qualification qualification = new Qualification();
             DBConnection dbCon = new DBConnection();

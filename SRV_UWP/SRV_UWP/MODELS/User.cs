@@ -17,60 +17,41 @@ namespace SRV_UWP.models
         public string DOB { get; }
         public string UserID { get; set; }
         public string Password { get; set; }
-        /*
-                public bool Login(string inUserId, string inPassword)
-                {
-                    DBConnection dbCon = new DBConnection();
-                    if (dbCon.IsConnect())
-                    {
-                        User myUser = new User();
-                        string query = String.Format("SELECT * FROM user WHERE UserID='{0}' AND Password='{1}'", inUserId, inPassword);
-                        var cmd = new MySqlCommand(query, dbCon.Connection);
-                        var reader = cmd.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            string stringUserID = reader.GetString(0);
-                            myUser.UserID = stringUserID;
-                        }
-                        dbCon.Close();
-                        if (!string.IsNullOrEmpty(myUser.UserID))
-                        {
-                            return true;
-                        }
-                        else { return false; }
-                    }
-                    else { return false; }
-                }
-        */
-        //new login for student ID only - 18/10/2019 Yuchun
-        public bool Login(string inUserId)
+
+        public static string DEFAULT_PASSWORD = "srv";
+
+        public bool Login(string id)
         {
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
-                User myUser = new User();
-                string query = String.Format("SELECT * FROM student WHERE StudentID='{0}'", inUserId);
+                User user = new User();
+                string query = String.Format("SELECT * FROM student WHERE StudentID='{0}'", id);
                 var cmd = new MySqlCommand(query, dbCon.Connection);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string stringUserID = reader.GetString(0);
-                    myUser.UserID = stringUserID;
+                    user.UserID = reader.GetString(0);
                 }
                 dbCon.Close();
-                if (!string.IsNullOrEmpty(myUser.UserID))
+                if (!string.IsNullOrEmpty(user.UserID))
                 {
                     return true;
                 }
-                else { return false; }
+                else
+                {
+                    return false;
+                } //end validate return user id
             }
-            else { return false; }
+            else
+            {
+                return false;
+            } // end validate database connection
         }
-        public Qualification SelectQualification(Qualification selectedItem)
+
+        public Qualification SelectQualification(Qualification selectedQual)
         {
-            Qualification mySelectedItem = selectedItem;
-            //TODO
-            return mySelectedItem;
+            return selectedQual.GetQualification(selectedQual.QualCode);
         }
     }
 }
