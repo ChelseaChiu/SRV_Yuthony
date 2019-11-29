@@ -31,12 +31,12 @@ namespace SRV_UWP.views
         }
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            string password = txtPassword.Password;
             DBConnection dbCon = new DBConnection();
             if (dbCon.IsConnect())
             {
 
-                if (txtPassword.Password != User.DEFAULT_PASSWORD)
+                if (password != User.DEFAULT_PASSWORD)
                 {
                     var message = new MessageDialog("Invalid Password!", "Warning");
                     await message.ShowAsync();
@@ -44,7 +44,6 @@ namespace SRV_UWP.views
                 else  //else password is correct, get data from database
                 {
                     string userid = txtId.Text;
-                    string password = txtPassword.Password;
                     User user = new User();
                     Lecturer lecturer = new Lecturer();
                     if (!userid.All(char.IsDigit))  //if user login as string
@@ -67,7 +66,7 @@ namespace SRV_UWP.views
                             App._Usertype = "lecturer";
                             Frame.Navigate(typeof(SearchStudent));      //user is a lecturer
                         }
-                        else if (user.Login(userid))
+                        else if (user.Login(userid,password))
                         {
                             App._Usertype = "student";
                             Frame.Navigate(typeof(Result_Student_View), userid);    //user is a student 

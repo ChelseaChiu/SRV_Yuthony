@@ -20,33 +20,40 @@ namespace SRV_UWP.models
 
         public static string DEFAULT_PASSWORD = "srv";
 
-        public bool Login(string id)
+        public bool Login(string id,string pw)
         {
-            DBConnection dbCon = new DBConnection();
-            if (dbCon.IsConnect())
+            if (pw != DEFAULT_PASSWORD)
             {
-                User user = new User();
-                string query = String.Format("SELECT * FROM student WHERE StudentID='{0}'", id);
-                var cmd = new MySqlCommand(query, dbCon.Connection);
-                var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                return false;
+            }
+            else
+            {
+                DBConnection dbCon = new DBConnection();
+                if (dbCon.IsConnect())
                 {
-                    user.UserID = reader.GetString(0);
-                }
-                dbCon.Close();
-                if (!string.IsNullOrEmpty(user.UserID))
-                {
-                    return true;
+                    User user = new User();
+                    string query = String.Format("SELECT * FROM student WHERE StudentID='{0}'", id);
+                    var cmd = new MySqlCommand(query, dbCon.Connection);
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        user.UserID = reader.GetString(0);
+                    }
+                    dbCon.Close();
+                    if (!string.IsNullOrEmpty(user.UserID))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    } //end validate return user id
                 }
                 else
                 {
                     return false;
-                } //end validate return user id
+                } // end validate database connection
             }
-            else
-            {
-                return false;
-            } // end validate database connection
         }
 
         public Qualification SelectQualification(Qualification selectedQual)
